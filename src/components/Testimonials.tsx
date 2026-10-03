@@ -1,0 +1,127 @@
+import type { Variants } from 'motion/react'
+import { motion } from 'motion/react'
+import { Quote, MessageSquareQuote, User } from 'lucide-react'
+import { testimonialsData } from '../data/testimonials'
+import type { Testimonial } from '../data/testimonials'
+
+export const Testimonials = () => {
+  const containerVariants: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.05,
+      },
+    },
+  }
+
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+    },
+  }
+
+  const hasTestimonials = testimonialsData.length > 0
+
+  return (
+    <section
+      id="testimonials"
+      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-[#24292E]"
+    >
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-80px' }}
+        className="space-y-10"
+      >
+        {/* Section Header */}
+        <motion.div variants={cardVariants} className="space-y-2">
+          <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#CCFF00] bg-[#CCFF00]/10 px-3 py-1 rounded-full border border-[#CCFF00]/30">
+            Testimonials
+          </span>
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white pt-2 highlight-strip-neon pl-4">
+            What People Say
+          </h2>
+          <p className="text-base sm:text-lg text-[#A0A6AD] max-w-2xl pt-1">
+            Feedback from people I have worked and collaborated with.
+          </p>
+        </motion.div>
+
+        {/* Conditional Content View */}
+        {hasTestimonials ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+            {testimonialsData.map((item: Testimonial) => (
+              <motion.div
+                key={item.id}
+                variants={cardVariants}
+                className="h-full flex flex-col justify-between p-6 rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl space-y-6 transition-all duration-300 hover:border-[#CCFF00]/40 group"
+              >
+                <div className="space-y-4">
+                  {/* Quote Icon */}
+                  <div className="p-2.5 rounded-xl bg-[#CCFF00]/10 text-[#CCFF00] border border-[#CCFF00]/20 w-fit group-hover:bg-[#CCFF00] group-hover:text-[#0D0F11] transition-colors">
+                    <Quote className="w-5 h-5" aria-hidden="true" />
+                  </div>
+
+                  {/* Quote Body */}
+                  <p className="text-xs sm:text-sm text-white italic leading-relaxed">
+                    "{item.quote}"
+                  </p>
+                </div>
+
+                {/* Author Info */}
+                <div className="pt-4 border-t border-[#24292E] flex items-center space-x-3">
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={`${item.name} profile`}
+                      className="w-10 h-10 rounded-full object-cover border border-[#24292E]"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-[#0D0F11] border border-[#24292E] flex items-center justify-center text-[#CCFF00] shrink-0">
+                      <User className="w-5 h-5" aria-hidden="true" />
+                    </div>
+                  )}
+                  <div>
+                    <h3 className="text-xs font-bold text-white tracking-tight">
+                      {item.name}
+                    </h3>
+                    {(item.role || item.organization) && (
+                      <p className="text-[11px] text-[#A0A6AD]">
+                        {[item.role, item.organization].filter(Boolean).join(' • ')}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        ) : (
+          /* Intentional Professional Empty State */
+          <motion.div
+            variants={cardVariants}
+            className="p-8 sm:p-12 rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl text-center flex flex-col items-center justify-center space-y-4 max-w-2xl mx-auto"
+          >
+            <div className="w-14 h-14 rounded-2xl bg-[#CCFF00]/10 border border-[#CCFF00]/30 flex items-center justify-center text-[#CCFF00] shadow-[0_0_15px_rgba(204,255,0,0.15)]">
+              <MessageSquareQuote className="w-7 h-7" aria-hidden="true" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="text-lg font-bold text-white">
+                Testimonials & Recommendations
+              </h3>
+              <p className="text-xs sm:text-sm text-[#A0A6AD] max-w-md mx-auto leading-relaxed">
+                Feedback and endorsements from project mentors, academic supervisors, and teammates will be displayed here as they are published.
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </motion.div>
+    </section>
+  )
+}
+
+export default Testimonials
