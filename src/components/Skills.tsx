@@ -37,7 +37,7 @@ export const Skills = () => {
   return (
     <section
       id="skills"
-      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-[#24292E]"
+      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-theme-border"
     >
       <motion.div
         variants={containerVariants}
@@ -48,13 +48,13 @@ export const Skills = () => {
       >
         {/* Section Header */}
         <motion.div variants={cardVariants} className="space-y-2">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#CCFF00] bg-[#CCFF00]/10 px-3 py-1 rounded-full border border-[#CCFF00]/30">
+          <span className="tag-neon">
             Skills
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white pt-2 highlight-strip-neon pl-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text pt-2 highlight-strip-neon pl-4">
             Technical Expertise & Tools
           </h2>
-          <p className="text-base sm:text-lg text-[#A0A6AD] max-w-2xl pt-1">
+          <p className="text-base sm:text-lg text-theme-secondary max-w-2xl pt-1">
             Technologies and tools I use to build modern, scalable, and user-focused applications.
           </p>
         </motion.div>
@@ -68,14 +68,14 @@ export const Skills = () => {
               <motion.div
                 key={category.id}
                 variants={cardVariants}
-                className="p-6 rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl flex flex-col justify-between space-y-5 transition-all duration-200 hover:border-[#CCFF00]/40 hover:shadow-[0_0_20px_rgba(204,255,0,0.08)] group"
+                className="p-6 rounded-2xl bg-theme-card border border-theme-border shadow-xl flex flex-col justify-between space-y-5 transition-all duration-200 hover:border-theme-accent/40 group"
               >
                 {/* Category Header */}
-                <div className="flex items-center space-x-3 border-b border-[#24292E] pb-4">
-                  <div className="p-2.5 rounded-xl bg-[#CCFF00]/10 text-[#CCFF00] border border-[#CCFF00]/20 group-hover:bg-[#CCFF00] group-hover:text-[#0D0F11] transition-colors shrink-0">
+                <div className="flex items-center space-x-3 border-b border-theme-border pb-4">
+                  <div className="p-2.5 rounded-xl bg-theme-accent/10 text-theme-accent border border-theme-accent/20 group-hover:bg-theme-accent group-hover:text-theme-bg transition-colors shrink-0">
                     <IconComponent className="w-5 h-5" aria-hidden="true" />
                   </div>
-                  <h3 className="text-lg font-bold text-white tracking-tight">
+                  <h3 className="text-lg font-bold text-theme-text tracking-tight">
                     {category.title}
                   </h3>
                 </div>
@@ -85,7 +85,7 @@ export const Skills = () => {
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1.5 rounded-lg text-xs font-semibold text-[#A0A6AD] bg-[#0D0F11]/70 border border-[#24292E] hover:text-[#CCFF00] hover:border-[#CCFF00]/40 hover:bg-[#0D0F11] transition-all cursor-default"
+                      className="px-3 py-1.5 rounded-lg text-xs font-semibold text-theme-secondary bg-theme-bg border border-theme-border hover:text-theme-accent hover:border-theme-accent/40 transition-all cursor-default"
                     >
                       {skill}
                     </span>

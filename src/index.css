@@ -3,14 +3,26 @@
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 
-  /* Pivlasar Hirva / Neon Lime (#CCFF00 & #D4FF00) */
+  /* Brand Accent Tokens */
   --color-brand: #CCFF00;
+  --color-brand-accent: #CCFF00;
+  --color-lime-accent: #65A30D;
   --color-neon-lime: #CCFF00;
   --color-neon-hover: #D4FF00;
 
-  /* Theme Tokens based on User Specifications */
+  /* User Specified Light Theme Palette Tokens */
+  --color-light-bg: #FAFAF7;          /* Background #FAFAF7 */
+  --color-light-card: #FFFFFF;        /* Surface/Card #FFFFFF */
+  --color-light-primary-green: #65A30D; /* Primary Green #65A30D */
+  --color-light-hover-green: #4D7C0F;   /* Hover Green #4D7C0F */
+  --color-light-text-main: #18181B;    /* Main Text #18181B */
+  --color-light-text-secondary: #52525B; /* Secondary Text #52525B */
+  --color-light-border: #E4E4E7;      /* Border #E4E4E7 */
+  --color-light-accent: #F0FDF4;      /* Light Accent #F0FDF4 */
+
+  /* Dark Theme Tokens */
   --color-dark-bg: #0D0F11;
-  --color-dark-card: #1A1D20;
+  --color-dark-card: #18181B;
   --color-dark-text: #FFFFFF;
   --color-dark-text-secondary: #A0A6AD;
   --color-dark-accent: #CCFF00;
@@ -21,19 +33,23 @@
   --color-theme-text: var(--theme-text-primary);
   --color-theme-secondary: var(--theme-text-secondary);
   --color-theme-accent: var(--theme-accent);
+  --color-theme-accent-hover: var(--theme-accent-hover);
   --color-theme-card: var(--theme-card);
   --color-theme-border: var(--theme-border);
+  --color-theme-light-accent: var(--theme-light-accent);
 }
 
 /* CSS Theme Variables for Dark (default) & Light mode support */
 :root {
-  --theme-bg: #0D0F11;
-  --theme-text-primary: #FFFFFF;
-  --theme-text-secondary: #A0A6AD;
-  --theme-accent: #CCFF00;
-  --theme-card: #1A1D20;
-  --theme-border: #24292E;
-  --theme-grid: rgba(204, 255, 0, 0.05);
+  --theme-bg: #FAFAF7;           /* Background #FAFAF7 */
+  --theme-text-primary: #18181B;  /* Main Text #18181B */
+  --theme-text-secondary: #52525B;/* Secondary Text #52525B */
+  --theme-accent: #65A30D;        /* Primary Green #65A30D */
+  --theme-accent-hover: #4D7C0F;  /* Hover Green #4D7C0F */
+  --theme-card: #FFFFFF;          /* Surface/Card #FFFFFF */
+  --theme-border: #E4E4E7;        /* Border #E4E4E7 */
+  --theme-light-accent: #F0FDF4;  /* Light Accent #F0FDF4 */
+  --theme-grid: rgba(0, 0, 0, 0.04);
 }
 
 .dark {
@@ -41,19 +57,23 @@
   --theme-text-primary: #FFFFFF;
   --theme-text-secondary: #A0A6AD;
   --theme-accent: #CCFF00;
-  --theme-card: #1A1D20;
+  --theme-accent-hover: #D4FF00;
+  --theme-card: #18181B;
   --theme-border: #24292E;
+  --theme-light-accent: rgba(204, 255, 0, 0.1);
   --theme-grid: rgba(204, 255, 0, 0.05);
 }
 
 .light {
-  --theme-bg: #F8FAFC;
-  --theme-text-primary: #0F172A;
-  --theme-text-secondary: #64748B;
-  --theme-accent: #CCFF00;
-  --theme-card: #FFFFFF;
-  --theme-border: #E2E8F0;
-  --theme-grid: rgba(0, 0, 0, 0.05);
+  --theme-bg: #FAFAF7;           /* Background #FAFAF7 */
+  --theme-text-primary: #18181B;  /* Main Text #18181B */
+  --theme-text-secondary: #52525B;/* Secondary Text #52525B */
+  --theme-accent: #65A30D;        /* Primary Green #65A30D */
+  --theme-accent-hover: #4D7C0F;  /* Hover Green #4D7C0F */
+  --theme-card: #FFFFFF;          /* Surface/Card #FFFFFF */
+  --theme-border: #E4E4E7;        /* Border #E4E4E7 */
+  --theme-light-accent: #F0FDF4;  /* Light Accent #F0FDF4 */
+  --theme-grid: rgba(0, 0, 0, 0.04);
 }
 
 /* Base Global Styles */
@@ -86,8 +106,8 @@ body {
 .bg-grid-lines {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
 }
 
 .dark .bg-grid-lines {
@@ -113,6 +133,11 @@ body {
   box-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
 }
 
+.light .highlight-strip-neon::before {
+  background: #65A30D;
+  box-shadow: 0 0 10px rgba(101, 163, 13, 0.35);
+}
+
 /* Neon Tag styling (#CCFF00) */
 .tag-neon {
   display: inline-flex;
@@ -128,7 +153,34 @@ body {
   border: 1px solid rgba(204, 255, 0, 0.3);
 }
 
-/* Primary Button Styling with Neon Lime #CCFF00 */
+.light .tag-neon {
+  color: #65A30D;
+  background-color: #F0FDF4;
+  border-color: #DCFCE7;
+}
+
+/* Lime Accent Tag styling (#84CC16) */
+.tag-lime-accent {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #84CC16;
+  background-color: rgba(132, 204, 22, 0.1);
+  border: 1px solid rgba(132, 204, 22, 0.3);
+}
+
+.light .tag-lime-accent {
+  color: #65A30D;
+  background-color: #F0FDF4;
+  border-color: #DCFCE7;
+}
+
+/* Primary Neon Lime Button (#CCFF00) */
 .btn-neon-lime {
   background-color: #CCFF00;
   color: #0D0F11;
@@ -137,8 +189,38 @@ body {
   box-shadow: 0 0 15px rgba(204, 255, 0, 0.25);
 }
 
+.light .btn-neon-lime {
+  background-color: #65A30D;
+  color: #FFFFFF;
+  box-shadow: 0 2px 10px rgba(101, 163, 13, 0.25);
+}
+
 .btn-neon-lime:hover {
   background-color: #D4FF00;
   box-shadow: 0 0 25px rgba(204, 255, 0, 0.45);
   transform: translateY(-1px);
+}
+
+.light .btn-neon-lime:hover {
+  background-color: #4D7C0F;
+  box-shadow: 0 4px 15px rgba(77, 124, 15, 0.35);
+}
+
+/* Rich Dark Slate Button / Primary CTA (#18181B) */
+.btn-dark-slate {
+  background-color: #18181B;
+  color: #FFFFFF;
+  border: 1px solid #24292E;
+  font-weight: 600;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-dark-slate:hover {
+  background-color: #27272A;
+  border-color: #CCFF00;
+  transform: translateY(-1px);
+}
+
+.light .btn-dark-slate:hover {
+  border-color: #65A30D;
 }

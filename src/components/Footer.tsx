@@ -34,30 +34,30 @@ export const Footer = () => {
   const hasLinkedin = Boolean(contactInfo.linkedin && contactInfo.linkedin.trim() && contactInfo.linkedin !== '#')
 
   return (
-    <footer className="w-full bg-[#0D0F11] border-t border-[#24292E] py-12 px-4 sm:px-6 lg:px-8">
+    <footer className="w-full bg-theme-card border-t border-theme-border py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto space-y-8">
         {/* Top Footer Grid */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-[#24292E]/60">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-theme-border">
           {/* Brand Info */}
           <div className="space-y-1">
             <a
               href="#home"
-              className="text-xl font-bold tracking-tight text-[#CCFF00] hover:opacity-90 transition-opacity"
+              className="text-xl font-bold tracking-tight text-theme-accent hover:opacity-90 transition-opacity"
             >
               Rashmi Shara
             </a>
-            <p className="text-xs text-[#A0A6AD]">
+            <p className="text-xs text-theme-secondary">
               Software Engineering Undergraduate
             </p>
           </div>
 
           {/* Footer Quick Links */}
-          <nav className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-medium text-[#A0A6AD]" aria-label="Footer Navigation">
+          <nav className="flex flex-wrap gap-x-4 gap-y-2 text-xs font-medium text-theme-secondary" aria-label="Footer Navigation">
             {FOOTER_LINKS.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                className="hover:text-[#CCFF00] transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+                className="hover:text-theme-accent transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
               >
                 {link.label}
               </a>
@@ -66,7 +66,7 @@ export const Footer = () => {
         </div>
 
         {/* Bottom Bar: Copyright & Socials */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#A0A6AD]">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-theme-secondary">
           <p>© {currentYear} Rashmi Shara. All rights reserved.</p>
 
           {/* Social Icons (rendered only if valid URLs are set) */}
@@ -78,7 +78,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub Profile"
-                  className="p-2 rounded-lg bg-[#1A1D20] text-[#A0A6AD] hover:text-[#CCFF00] border border-[#24292E] hover:border-[#CCFF00]/40 transition-colors"
+                  className="p-2 rounded-lg bg-theme-bg text-theme-secondary hover:text-theme-accent border border-theme-border hover:border-theme-accent/40 transition-colors"
                 >
                   <GithubIcon className="w-4 h-4" />
                 </a>
@@ -89,7 +89,7 @@ export const Footer = () => {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn Profile"
-                  className="p-2 rounded-lg bg-[#1A1D20] text-[#A0A6AD] hover:text-[#CCFF00] border border-[#24292E] hover:border-[#CCFF00]/40 transition-colors"
+                  className="p-2 rounded-lg bg-theme-bg text-theme-secondary hover:text-theme-accent border border-theme-border hover:border-theme-accent/40 transition-colors"
                 >
                   <LinkedinIcon className="w-4 h-4" />
                 </a>

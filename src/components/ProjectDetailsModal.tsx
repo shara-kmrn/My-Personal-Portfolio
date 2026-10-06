@@ -64,7 +64,7 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-[#0D0F11]/80 backdrop-blur-md transition-opacity"
+            className="fixed inset-0 bg-theme-text/40 backdrop-blur-md transition-opacity"
             aria-hidden="true"
           />
 
@@ -74,27 +74,27 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-            className="relative z-10 w-full max-w-3xl max-h-[90vh] bg-[#1A1D20] border border-[#24292E] rounded-2xl shadow-2xl overflow-hidden flex flex-col my-auto"
+            className="relative z-10 w-full max-w-3xl max-h-[90vh] bg-theme-card border border-theme-border rounded-2xl shadow-2xl overflow-hidden flex flex-col my-auto"
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between p-5 sm:p-6 border-b border-[#24292E] bg-[#0D0F11]/60">
+            <div className="flex items-center justify-between p-5 sm:p-6 border-b border-theme-border bg-theme-bg/60">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
                   <span className="tag-neon text-xs py-0.5 px-2.5">
                     {project.category}
                   </span>
-                  <span className="text-xs font-semibold text-[#A0A6AD]">
+                  <span className="text-xs font-semibold text-theme-secondary">
                     {project.type}
                   </span>
                 </div>
                 <h2
                   id="modal-project-title"
-                  className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight"
+                  className="text-2xl sm:text-3xl font-extrabold text-theme-text tracking-tight"
                 >
                   {project.title}
                 </h2>
                 {project.fullName && (
-                  <p className="text-xs sm:text-sm text-[#A0A6AD] italic">
+                  <p className="text-xs sm:text-sm text-theme-secondary italic">
                     {project.fullName}
                   </p>
                 )}
@@ -105,7 +105,7 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
                 ref={closeButtonRef}
                 type="button"
                 onClick={onClose}
-                className="p-2 rounded-xl text-[#A0A6AD] hover:text-white hover:bg-[#24292E] transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+                className="p-2 rounded-xl text-theme-secondary hover:text-theme-text hover:bg-theme-border transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
                 aria-label="Close project details modal"
               >
                 <X className="w-6 h-6" />
@@ -116,33 +116,33 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
             <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1 text-xs sm:text-sm leading-relaxed">
               {/* My Role */}
               {project.role && (
-                <div className="inline-flex items-center gap-2 p-3 rounded-xl bg-[#0D0F11]/80 border border-[#24292E] text-white">
-                  <UserCheck className="w-4 h-4 text-[#CCFF00]" aria-hidden="true" />
-                  <span>Role: <strong className="text-[#CCFF00] font-semibold">{project.role}</strong></span>
+                <div className="inline-flex items-center gap-2 p-3 rounded-xl bg-theme-bg/80 border border-theme-border text-theme-text">
+                  <UserCheck className="w-4 h-4 text-theme-accent" aria-hidden="true" />
+                  <span>Role: <strong className="text-theme-accent font-semibold">{project.role}</strong></span>
                 </div>
               )}
 
               {/* Full Description */}
               <div className="space-y-2">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#A0A6AD] flex items-center gap-1.5">
-                  <Layers className="w-4 h-4 text-[#CCFF00]" />
+                <h3 className="text-xs font-bold uppercase tracking-wider text-theme-secondary flex items-center gap-1.5">
+                  <Layers className="w-4 h-4 text-theme-accent" />
                   Project Overview
                 </h3>
-                <p className="text-[#A0A6AD] bg-[#0D0F11]/40 p-4 rounded-xl border border-[#24292E]/60 text-sm leading-relaxed">
+                <p className="text-theme-secondary bg-theme-bg/40 p-4 rounded-xl border border-theme-border/60 text-sm leading-relaxed">
                   {project.description}
                 </p>
               </div>
 
               {/* Technologies Used */}
               <div className="space-y-2">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#A0A6AD]">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-theme-secondary">
                   Technologies & Tools
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-[#0D0F11] border border-[#24292E]"
+                      className="px-3 py-1.5 rounded-lg text-xs font-semibold text-theme-text bg-theme-bg border border-theme-border"
                     >
                       {tech}
                     </span>
@@ -152,12 +152,12 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
 
               {/* Contribution Highlight (if available) */}
               {project.contribution && (
-                <div className="p-4 rounded-xl bg-[#CCFF00]/10 border border-[#CCFF00]/30 space-y-1.5">
-                  <div className="flex items-center gap-2 text-[#CCFF00] font-bold text-xs uppercase tracking-wider">
+                <div className="p-4 rounded-xl bg-theme-accent/10 border border-theme-accent/30 space-y-1.5">
+                  <div className="flex items-center gap-2 text-theme-accent font-bold text-xs uppercase tracking-wider">
                     <Sparkles className="w-4 h-4" />
                     <span>My Specific Contribution</span>
                   </div>
-                  <p className="text-white text-xs sm:text-sm leading-relaxed">
+                  <p className="text-theme-text text-xs sm:text-sm leading-relaxed">
                     {project.contribution}
                   </p>
                 </div>
@@ -166,17 +166,17 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
               {/* Sensors Used (for IoT projects like BLIMAS) */}
               {project.sensors && project.sensors.length > 0 && (
                 <div className="space-y-2">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#A0A6AD] flex items-center gap-1.5">
-                    <Cpu className="w-4 h-4 text-[#CCFF00]" />
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-theme-secondary flex items-center gap-1.5">
+                    <Cpu className="w-4 h-4 text-theme-accent" />
                     Hardware & Sensors
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {project.sensors.map((sensor) => (
                       <div
                         key={sensor}
-                        className="p-2.5 rounded-lg bg-[#0D0F11]/60 border border-[#24292E] text-xs font-medium text-white flex items-center gap-2"
+                        className="p-2.5 rounded-lg bg-theme-bg/60 border border-theme-border text-xs font-medium text-theme-text flex items-center gap-2"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-[#CCFF00]" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-theme-accent" />
                         <span>{sensor}</span>
                       </div>
                     ))}
@@ -186,16 +186,16 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
 
               {/* Key Features List */}
               <div className="space-y-2">
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#A0A6AD]">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-theme-secondary">
                   Key Features ({project.features.length})
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {project.features.map((feature) => (
                     <div
                       key={feature}
-                      className="flex items-start gap-2 p-2.5 rounded-lg bg-[#0D0F11]/50 border border-[#24292E] text-xs text-white"
+                      className="flex items-start gap-2 p-2.5 rounded-lg bg-theme-bg/50 border border-theme-border text-xs text-theme-text"
                     >
-                      <CheckCircle2 className="w-4 h-4 text-[#CCFF00] shrink-0 mt-0.5" aria-hidden="true" />
+                      <CheckCircle2 className="w-4 h-4 text-theme-accent shrink-0 mt-0.5" aria-hidden="true" />
                       <span>{feature}</span>
                     </div>
                   ))}
@@ -205,7 +205,7 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
               {/* Business Rules (if available) */}
               {project.businessRules && project.businessRules.length > 0 && (
                 <div className="space-y-2 pt-2">
-                  <h3 className="text-xs font-bold uppercase tracking-wider text-[#CCFF00] flex items-center gap-1.5">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-theme-accent flex items-center gap-1.5">
                     <ShieldAlert className="w-4 h-4" />
                     Business & Booking Rules
                   </h3>
@@ -213,10 +213,10 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
                     {project.businessRules.map((rule) => (
                       <div
                         key={rule}
-                        className="p-3 rounded-lg bg-[#0D0F11] border border-[#24292E] text-xs text-[#A0A6AD] flex items-start gap-2"
+                        className="p-3 rounded-lg bg-theme-bg border border-theme-border text-xs text-theme-secondary flex items-start gap-2"
                       >
-                        <span className="text-[#CCFF00] font-bold">•</span>
-                        <span className="text-white">{rule}</span>
+                        <span className="text-theme-accent font-bold">•</span>
+                        <span className="text-theme-text">{rule}</span>
                       </div>
                     ))}
                   </div>
@@ -225,14 +225,14 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
             </div>
 
             {/* Modal Footer / Action Bar */}
-            <div className="p-5 border-t border-[#24292E] bg-[#0D0F11]/80 flex flex-wrap items-center justify-between gap-3">
+            <div className="p-5 border-t border-theme-border bg-theme-bg/80 flex flex-wrap items-center justify-between gap-3">
               <div className="flex items-center gap-2">
                 {project.githubUrl && project.githubUrl !== '#' ? (
                   <a
                     href={project.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider text-white bg-[#24292E] hover:bg-[#2c3238] transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider btn-dark-slate focus:outline-none focus:ring-2 focus:ring-theme-accent"
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span>View GitHub</span>
@@ -244,7 +244,7 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
                     href={project.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider btn-neon-lime focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider btn-neon-lime focus:outline-none focus:ring-2 focus:ring-theme-accent"
                   >
                     <ExternalLink className="w-4 h-4" />
                     <span>Live Demo</span>
@@ -255,7 +255,7 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2 rounded-lg text-xs font-semibold text-[#A0A6AD] hover:text-white hover:bg-[#24292E] transition-colors cursor-pointer"
+                className="px-5 py-2 rounded-lg text-xs font-semibold text-theme-secondary hover:text-theme-text hover:bg-theme-border transition-colors cursor-pointer"
               >
                 Close
               </button>

@@ -32,9 +32,9 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
   const isIoT = project.category === 'IoT'
 
   return (
-    <div className="h-full flex flex-col justify-between rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl overflow-hidden transition-all duration-300 hover:border-[#CCFF00]/40 hover:shadow-[0_0_25px_rgba(204,255,0,0.08)] group">
+    <div className="h-full flex flex-col justify-between rounded-2xl bg-theme-card border border-theme-border shadow-xl overflow-hidden transition-all duration-300 hover:border-[#CCFF00]/40 hover:shadow-[0_0_25px_rgba(204,255,0,0.08)] group">
       {/* Top Visual Area / Placeholder Banner */}
-      <div className="relative h-48 w-full bg-[#0D0F11] border-b border-[#24292E] flex items-center justify-center overflow-hidden">
+      <div className="relative h-48 w-full bg-theme-bg/90 border-b border-theme-border flex items-center justify-center overflow-hidden">
         {/* Background Grid Pattern */}
         <div className="absolute inset-0 bg-grid-lines opacity-60" />
         
@@ -68,7 +68,7 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
         </div>
 
         <div className="absolute top-3 right-3 z-20">
-          <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold text-[#A0A6AD] bg-[#1A1D20]/90 border border-[#24292E] backdrop-blur-xs">
+          <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold text-theme-secondary bg-theme-card/90 border border-theme-border backdrop-blur-xs">
             {project.type}
           </span>
         </div>
@@ -79,11 +79,11 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
         <div className="space-y-3">
           {/* Header & Title */}
           <div>
-            <h3 className="text-xl font-bold text-white tracking-tight group-hover:text-[#CCFF00] transition-colors">
+            <h3 className="text-xl font-bold text-theme-text tracking-tight group-hover:text-[#CCFF00] transition-colors">
               {project.title}
             </h3>
             {project.fullName && (
-              <p className="text-xs text-[#A0A6AD] mt-0.5 italic">
+              <p className="text-xs text-theme-secondary mt-0.5 italic">
                 {project.fullName}
               </p>
             )}
@@ -91,23 +91,23 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
 
           {/* Role Pill if available */}
           {project.role && (
-            <div className="inline-flex items-center gap-1.5 text-xs text-[#A0A6AD] bg-[#0D0F11]/60 px-2.5 py-1 rounded-md border border-[#24292E]">
+            <div className="inline-flex items-center gap-1.5 text-xs text-theme-secondary bg-theme-bg/60 px-2.5 py-1 rounded-md border border-theme-border">
               <UserCheck className="w-3.5 h-3.5 text-[#CCFF00]" aria-hidden="true" />
-              <span>Role: <strong className="text-white font-semibold">{project.role}</strong></span>
+              <span>Role: <strong className="text-theme-text font-semibold">{project.role}</strong></span>
             </div>
           )}
 
           {/* Short Description */}
-          <p className="text-xs sm:text-sm text-[#A0A6AD] line-clamp-2 leading-relaxed">
+          <p className="text-xs sm:text-sm text-theme-secondary line-clamp-2 leading-relaxed">
             {project.description}
           </p>
 
           {/* Selected Key Features (First 3) */}
           <div className="space-y-1.5 pt-1">
-            <span className="text-[11px] font-semibold uppercase tracking-wider text-[#A0A6AD]">
+            <span className="text-[11px] font-semibold uppercase tracking-wider text-theme-secondary">
               Key Features
             </span>
-            <ul className="space-y-1 text-xs text-white">
+            <ul className="space-y-1 text-xs text-theme-text">
               {project.features.slice(0, 3).map((feature) => (
                 <li key={feature} className="flex items-start gap-1.5 leading-snug">
                   <CheckCircle2 className="w-3.5 h-3.5 text-[#CCFF00] shrink-0 mt-0.5" aria-hidden="true" />
@@ -119,13 +119,13 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
         </div>
 
         {/* Bottom Section: Technologies & Action Buttons */}
-        <div className="space-y-4 pt-2 border-t border-[#24292E]">
+        <div className="space-y-4 pt-2 border-t border-theme-border">
           {/* Tech Badges */}
           <div className="flex flex-wrap gap-1.5">
             {project.technologies.slice(0, 4).map((tech) => (
               <span
                 key={tech}
-                className="px-2.5 py-1 rounded-md text-[11px] font-medium text-[#A0A6AD] bg-[#0D0F11] border border-[#24292E]"
+                className="px-2.5 py-1 rounded-md text-[11px] font-medium text-theme-secondary bg-theme-bg border border-theme-border"
               >
                 {tech}
               </span>
@@ -156,7 +156,7 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.title} source code on GitHub`}
-                className="p-2 rounded-lg text-[#A0A6AD] hover:text-[#CCFF00] bg-[#0D0F11] border border-[#24292E] hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+                className="p-2 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-bg border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
               >
                 <GithubIcon className="w-4 h-4" />
               </a>
@@ -169,7 +169,7 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View live demo of ${project.title}`}
-                className="p-2 rounded-lg text-[#A0A6AD] hover:text-[#CCFF00] bg-[#0D0F11] border border-[#24292E] hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+                className="p-2 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-bg border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
               >
                 <ExternalLink className="w-4 h-4" />
               </a>

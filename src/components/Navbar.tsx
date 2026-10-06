@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
 
 interface NavItem {
   label: string
   href: string
+}
+
+interface NavbarProps {
+  theme: 'light' | 'dark'
+  onToggleTheme: () => void
 }
 
 const NAV_ITEMS: NavItem[] = [
@@ -17,7 +22,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Contact', href: '#contact' },
 ]
 
-export const Navbar = () => {
+export const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
@@ -59,45 +64,59 @@ export const Navbar = () => {
           {/* Brand Name */}
           <a
             href="#home"
-            className="text-xl font-bold tracking-tight text-brand dark:text-dark-accent hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 rounded-md"
+            className="text-xl font-bold tracking-tight text-theme-accent hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-theme-accent focus:ring-offset-2 rounded-md"
             onClick={handleLinkClick}
           >
             Rashmi Shara
           </a>
 
-          {/* Desktop Navigation Links & Action Button */}
+          {/* Desktop Navigation Links & Theme Toggle Button */}
           <div className="hidden md:flex items-center space-x-1 lg:space-x-3">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className="px-3 py-2 text-sm font-medium text-[#A0A6AD] hover:text-[#CCFF00] transition-colors duration-150 rounded-md focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+                className="px-3 py-2 text-sm font-medium text-theme-secondary hover:text-theme-accent transition-colors duration-150 rounded-md focus:outline-none focus:ring-2 focus:ring-theme-accent"
               >
                 {item.label}
               </a>
             ))}
 
-            {/* Neon Lime Sign In / Sign Up Button */}
-            <a
-              href="#contact"
-              className="ml-2 px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-lg btn-neon-lime focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+            {/* Light / Dark Mode Toggle Icon Button */}
+            <button
+              type="button"
+              onClick={onToggleTheme}
+              className="ml-2 p-2 rounded-xl bg-theme-card border border-theme-border text-theme-text hover:text-theme-accent hover:border-theme-accent/50 transition-all focus:outline-none focus:ring-2 focus:ring-theme-accent cursor-pointer shadow-xs"
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
-              Sign In / Sign Up
-            </a>
+              {theme === 'light' ? (
+                <Moon className="w-5 h-5 text-slate-700 hover:text-lime-600 transition-colors" />
+              ) : (
+                <Sun className="w-5 h-5 text-amber-400 hover:text-amber-300 transition-colors" />
+              )}
+            </button>
           </div>
 
-          {/* Mobile Hamburger Button */}
+          {/* Mobile Hamburger & Theme Toggle Button */}
           <div className="flex md:hidden items-center gap-2">
-            <a
-              href="#contact"
-              className="px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-md btn-neon-lime"
+            <button
+              type="button"
+              onClick={onToggleTheme}
+              className="p-2 rounded-xl bg-theme-card border border-theme-border text-theme-text hover:text-theme-accent transition-all focus:outline-none focus:ring-2 focus:ring-theme-accent cursor-pointer"
+              aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
-              Sign In
-            </a>
+              {theme === 'light' ? (
+                <Moon className="w-5 h-5 text-slate-700" />
+              ) : (
+                <Sun className="w-5 h-5 text-amber-400" />
+              )}
+            </button>
             <button
               type="button"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-[#A0A6AD] hover:text-white hover:bg-[#1A1D20] border border-transparent hover:border-[#24292E] transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+              className="inline-flex items-center justify-center p-2 rounded-md text-theme-secondary hover:text-theme-text hover:bg-theme-card border border-transparent hover:border-theme-border transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
               aria-label="Toggle navigation menu"
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
@@ -116,27 +135,18 @@ export const Navbar = () => {
       {isMenuOpen && (
         <div
           id="mobile-menu"
-          className="md:hidden border-b border-[#24292E] bg-[#0D0F11]/95 backdrop-blur-md px-4 pt-3 pb-5 space-y-2 shadow-lg mt-3"
+          className="md:hidden border-b border-theme-border bg-theme-card/95 backdrop-blur-md px-4 pt-3 pb-5 space-y-2 shadow-lg mt-3"
         >
           {NAV_ITEMS.map((item) => (
             <a
               key={item.label}
               href={item.href}
               onClick={handleLinkClick}
-              className="block px-3 py-2.5 rounded-md text-base font-medium text-[#A0A6AD] hover:text-[#CCFF00] hover:bg-[#1A1D20] transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+              className="block px-3 py-2.5 rounded-md text-base font-medium text-theme-secondary hover:text-theme-accent hover:bg-theme-bg transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
             >
               {item.label}
             </a>
           ))}
-          <div className="pt-2">
-            <a
-              href="#contact"
-              onClick={handleLinkClick}
-              className="block w-full text-center px-4 py-2.5 text-xs font-bold uppercase tracking-wider rounded-lg btn-neon-lime"
-            >
-              Sign In / Sign Up
-            </a>
-          </div>
         </div>
       )}
     </header>

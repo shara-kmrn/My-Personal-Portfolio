@@ -106,7 +106,7 @@ export const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-[#24292E]"
+      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-theme-border"
     >
       <motion.div
         variants={containerVariants}
@@ -117,13 +117,13 @@ export const Contact = () => {
       >
         {/* Section Header */}
         <motion.div variants={cardVariants} className="space-y-2">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#CCFF00] bg-[#CCFF00]/10 px-3 py-1 rounded-full border border-[#CCFF00]/30">
+          <span className="tag-neon">
             Get In Touch
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white pt-2 highlight-strip-neon pl-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text pt-2 highlight-strip-neon pl-4">
             Let's Connect
           </h2>
-          <p className="text-base sm:text-lg text-[#A0A6AD] max-w-2xl pt-1">
+          <p className="text-base sm:text-lg text-theme-secondary max-w-2xl pt-1">
             I'm always open to connecting with fellow developers, collaborators, and opportunities. Feel free to reach out.
           </p>
         </motion.div>
@@ -132,12 +132,12 @@ export const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Intro & Contact Links */}
           <motion.div variants={cardVariants} className="lg:col-span-5 space-y-6">
-            <div className="p-6 sm:p-8 rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl space-y-6">
+            <div className="p-6 sm:p-8 rounded-2xl bg-theme-card border border-theme-border shadow-xl space-y-6">
               <div className="space-y-2">
-                <h3 className="text-xl font-bold text-white tracking-tight">
+                <h3 className="text-xl font-bold text-theme-text tracking-tight">
                   Contact Information
                 </h3>
-                <p className="text-xs sm:text-sm text-[#A0A6AD] leading-relaxed">
+                <p className="text-xs sm:text-sm text-theme-secondary leading-relaxed">
                   Have a project idea, question, or opportunity? Fill out the form or reach out through my verified channels.
                 </p>
               </div>
@@ -148,9 +148,9 @@ export const Contact = () => {
                   {hasEmail && (
                     <a
                       href={`mailto:${contactInfo.email}`}
-                      className="flex items-center gap-3 p-3 rounded-xl bg-[#0D0F11] border border-[#24292E] text-xs font-semibold text-white hover:text-[#CCFF00] hover:border-[#CCFF00]/40 transition-colors"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-theme-bg border border-theme-border text-xs font-semibold text-theme-text hover:text-theme-accent hover:border-theme-accent/40 transition-colors"
                     >
-                      <div className="p-2 rounded-lg bg-[#CCFF00]/10 text-[#CCFF00] shrink-0">
+                      <div className="p-2 rounded-lg bg-theme-accent/10 text-theme-accent shrink-0">
                         <Mail className="w-4 h-4" />
                       </div>
                       <span className="truncate">{contactInfo.email}</span>
@@ -162,9 +162,9 @@ export const Contact = () => {
                       href={contactInfo.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-xl bg-[#0D0F11] border border-[#24292E] text-xs font-semibold text-white hover:text-[#CCFF00] hover:border-[#CCFF00]/40 transition-colors"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-theme-bg border border-theme-border text-xs font-semibold text-theme-text hover:text-theme-accent hover:border-theme-accent/40 transition-colors"
                     >
-                      <div className="p-2 rounded-lg bg-[#CCFF00]/10 text-[#CCFF00] shrink-0">
+                      <div className="p-2 rounded-lg bg-theme-accent/10 text-theme-accent shrink-0">
                         <GithubIcon className="w-4 h-4" />
                       </div>
                       <span>GitHub Profile</span>
@@ -176,9 +176,9 @@ export const Contact = () => {
                       href={contactInfo.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-xl bg-[#0D0F11] border border-[#24292E] text-xs font-semibold text-white hover:text-[#CCFF00] hover:border-[#CCFF00]/40 transition-colors"
+                      className="flex items-center gap-3 p-3 rounded-xl bg-theme-bg border border-theme-border text-xs font-semibold text-theme-text hover:text-theme-accent hover:border-theme-accent/40 transition-colors"
                     >
-                      <div className="p-2 rounded-lg bg-[#CCFF00]/10 text-[#CCFF00] shrink-0">
+                      <div className="p-2 rounded-lg bg-theme-accent/10 text-theme-accent shrink-0">
                         <LinkedinIcon className="w-4 h-4" />
                       </div>
                       <span>LinkedIn Profile</span>
@@ -186,7 +186,7 @@ export const Contact = () => {
                   )}
                 </div>
               ) : (
-                <div className="p-4 rounded-xl bg-[#0D0F11]/60 border border-[#24292E] text-xs text-[#A0A6AD] leading-relaxed">
+                <div className="p-4 rounded-xl bg-theme-bg/60 border border-theme-border text-xs text-theme-secondary leading-relaxed">
                   Direct email and social links will be added once verified. In the meantime, please send a message using the form.
                 </div>
               )}
@@ -198,15 +198,15 @@ export const Contact = () => {
             <form
               onSubmit={handleSubmit}
               noValidate
-              className="p-6 sm:p-8 rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl space-y-5"
+              className="p-6 sm:p-8 rounded-2xl bg-theme-card border border-theme-border shadow-xl space-y-5"
             >
               {/* Full Name Field */}
               <div className="space-y-1.5">
                 <label
                   htmlFor="contact-name"
-                  className="block text-xs font-bold uppercase tracking-wider text-white"
+                  className="block text-xs font-bold uppercase tracking-wider text-theme-text"
                 >
-                  Full Name <span className="text-[#CCFF00]">*</span>
+                  Full Name <span className="text-theme-accent">*</span>
                 </label>
                 <input
                   id="contact-name"
@@ -217,10 +217,10 @@ export const Contact = () => {
                   aria-invalid={Boolean(errors.name)}
                   aria-describedby={errors.name ? 'name-error' : undefined}
                   placeholder="Your Name"
-                  className={`w-full px-4 py-3 rounded-xl bg-[#0D0F11] border text-sm text-white placeholder-[#6B7280] focus:outline-none transition-colors ${
+                  className={`w-full px-4 py-3 rounded-xl bg-theme-bg border text-sm text-theme-text placeholder:text-theme-secondary focus:outline-none transition-colors ${
                     errors.name
                       ? 'border-red-500 focus:border-red-500'
-                      : 'border-[#24292E] focus:border-[#CCFF00]'
+                      : 'border-theme-border focus:border-theme-accent'
                   }`}
                 />
                 {errors.name && (
@@ -235,9 +235,9 @@ export const Contact = () => {
               <div className="space-y-1.5">
                 <label
                   htmlFor="contact-email"
-                  className="block text-xs font-bold uppercase tracking-wider text-white"
+                  className="block text-xs font-bold uppercase tracking-wider text-theme-text"
                 >
-                  Email Address <span className="text-[#CCFF00]">*</span>
+                  Email Address <span className="text-theme-accent">*</span>
                 </label>
                 <input
                   id="contact-email"
@@ -248,10 +248,10 @@ export const Contact = () => {
                   aria-invalid={Boolean(errors.email)}
                   aria-describedby={errors.email ? 'email-error' : undefined}
                   placeholder="name@example.com"
-                  className={`w-full px-4 py-3 rounded-xl bg-[#0D0F11] border text-sm text-white placeholder-[#6B7280] focus:outline-none transition-colors ${
+                  className={`w-full px-4 py-3 rounded-xl bg-theme-bg border text-sm text-theme-text placeholder:text-theme-secondary focus:outline-none transition-colors ${
                     errors.email
                       ? 'border-red-500 focus:border-red-500'
-                      : 'border-[#24292E] focus:border-[#CCFF00]'
+                      : 'border-theme-border focus:border-theme-accent'
                   }`}
                 />
                 {errors.email && (
@@ -266,9 +266,9 @@ export const Contact = () => {
               <div className="space-y-1.5">
                 <label
                   htmlFor="contact-message"
-                  className="block text-xs font-bold uppercase tracking-wider text-white"
+                  className="block text-xs font-bold uppercase tracking-wider text-theme-text"
                 >
-                  Message <span className="text-[#CCFF00]">*</span>
+                  Message <span className="text-theme-accent">*</span>
                 </label>
                 <textarea
                   id="contact-message"
@@ -279,10 +279,10 @@ export const Contact = () => {
                   aria-invalid={Boolean(errors.message)}
                   aria-describedby={errors.message ? 'message-error' : undefined}
                   placeholder="How can I help you?"
-                  className={`w-full px-4 py-3 rounded-xl bg-[#0D0F11] border text-sm text-white placeholder-[#6B7280] focus:outline-none transition-colors resize-none ${
+                  className={`w-full px-4 py-3 rounded-xl bg-theme-bg border text-sm text-theme-text placeholder:text-theme-secondary focus:outline-none transition-colors resize-none ${
                     errors.message
                       ? 'border-red-500 focus:border-red-500'
-                      : 'border-[#24292E] focus:border-[#CCFF00]'
+                      : 'border-theme-border focus:border-theme-accent'
                   }`}
                 />
                 {errors.message && (
@@ -296,7 +296,7 @@ export const Contact = () => {
               {/* Submit Button */}
               <button
                 type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider btn-neon-lime focus:outline-none focus:ring-2 focus:ring-[#CCFF00] cursor-pointer"
+                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider btn-neon-lime focus:outline-none focus:ring-2 focus:ring-theme-accent cursor-pointer"
               >
                 <span>Send Message</span>
                 <Send className="w-4 h-4" aria-hidden="true" />
@@ -307,9 +307,9 @@ export const Contact = () => {
                 <div
                   role="status"
                   aria-live="polite"
-                  className="p-4 rounded-xl bg-[#CCFF00]/10 border border-[#CCFF00]/30 flex items-start gap-3 text-xs text-white"
+                  className="p-4 rounded-xl bg-theme-accent/10 border border-theme-accent/30 flex items-start gap-3 text-xs text-theme-text"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[#CCFF00] shrink-0 mt-0.5" aria-hidden="true" />
+                  <CheckCircle2 className="w-4 h-4 text-theme-accent shrink-0 mt-0.5" aria-hidden="true" />
                   <p className="leading-relaxed">{statusMessage}</p>
                 </div>
               )}

@@ -60,7 +60,7 @@ export const About = () => {
   return (
     <section
       id="about"
-      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-[#24292E]"
+      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-theme-border"
     >
       <motion.div
         variants={containerVariants}
@@ -74,7 +74,7 @@ export const About = () => {
           <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#CCFF00] bg-[#CCFF00]/10 px-3 py-1 rounded-full border border-[#CCFF00]/30">
             About Me
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white pt-2 highlight-strip-neon pl-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text pt-2 highlight-strip-neon pl-4">
             Building Practical & User-Focused Software
           </h2>
         </motion.div>
@@ -83,7 +83,7 @@ export const About = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           {/* Left Column: Bio Paragraphs & Highlights */}
           <motion.div variants={itemVariants} className="lg:col-span-7 space-y-6">
-            <div className="space-y-4 text-base sm:text-lg text-[#A0A6AD] leading-relaxed">
+            <div className="space-y-4 text-base sm:text-lg text-theme-secondary leading-relaxed">
               <p>
                 I'm an Information Technology undergraduate at the University of Moratuwa with a strong interest in software engineering and building practical, user-focused applications. I enjoy turning ideas into functional solutions while continuously learning new technologies and improving my problem-solving skills.
               </p>
@@ -94,7 +94,7 @@ export const About = () => {
 
             {/* Highlights Grid */}
             <div className="pt-4">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[#A0A6AD] mb-3">
+              <h3 className="text-xs font-semibold uppercase tracking-wider text-theme-secondary mb-3">
                 Key Background & Focus
               </h3>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -103,10 +103,10 @@ export const About = () => {
                   return (
                     <div
                       key={item.label}
-                      className="p-3.5 rounded-xl bg-[#1A1D20] border border-[#24292E] flex flex-col items-start space-y-2 shadow-sm hover:border-[#CCFF00]/30 transition-colors"
+                      className="p-3.5 rounded-xl bg-theme-card border border-theme-border flex flex-col items-start space-y-2 shadow-sm hover:border-[#CCFF00]/30 transition-colors"
                     >
                       <IconComponent className="w-5 h-5 text-[#CCFF00]" aria-hidden="true" />
-                      <span className="text-xs font-semibold text-white leading-snug">
+                      <span className="text-xs font-semibold text-theme-text leading-snug">
                         {item.label}
                       </span>
                     </div>
@@ -118,10 +118,10 @@ export const About = () => {
 
           {/* Right Column: "UI/UX Design" & "App Design" Cards */}
           <motion.div variants={itemVariants} className="lg:col-span-5">
-            {/* Main Container Card in Dark Gray (#1A1D20) */}
-            <div className="p-6 rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl space-y-5">
-              <div className="flex items-center justify-between border-b border-[#24292E] pb-3">
-                <h3 className="text-lg font-bold text-white">What I Focus On</h3>
+            {/* Main Container Card in Theme Card color (#18181B / #FFFFFF) */}
+            <div className="p-6 rounded-2xl bg-theme-card border border-theme-border shadow-xl space-y-5">
+              <div className="flex items-center justify-between border-b border-theme-border pb-3">
+                <h3 className="text-lg font-bold text-theme-text">What I Focus On</h3>
                 <span className="text-xs font-semibold text-[#CCFF00]">UI/UX & App Design</span>
               </div>
 
@@ -131,19 +131,19 @@ export const About = () => {
                   return (
                     <div
                       key={area.title}
-                      className="p-4 rounded-xl bg-[#0D0F11]/60 border border-[#24292E] hover:border-[#CCFF00]/40 transition-all space-y-2 group"
+                      className="p-4 rounded-xl bg-theme-bg/60 border border-theme-border hover:border-[#CCFF00]/40 transition-all space-y-2 group"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2.5">
                           <div className="p-2 rounded-lg bg-[#CCFF00]/10 text-[#CCFF00] border border-[#CCFF00]/20 group-hover:bg-[#CCFF00] group-hover:text-[#0D0F11] transition-colors">
                             <Icon className="w-4 h-4" aria-hidden="true" />
                           </div>
-                          <h4 className="text-sm font-bold text-white">{area.title}</h4>
+                          <h4 className="text-sm font-bold text-theme-text">{area.title}</h4>
                         </div>
                         {/* Neon Tag for Product Design */}
                         <span className="tag-neon">{area.tag}</span>
                       </div>
-                      <p className="text-xs text-[#A0A6AD] leading-normal pl-9">
+                      <p className="text-xs text-theme-secondary leading-normal pl-9">
                         {area.description}
                       </p>
                     </div>

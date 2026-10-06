@@ -27,7 +27,7 @@ export const Certifications = () => {
   return (
     <section
       id="certifications"
-      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-[#24292E]"
+      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-theme-border"
     >
       <motion.div
         variants={containerVariants}
@@ -38,13 +38,13 @@ export const Certifications = () => {
       >
         {/* Section Header */}
         <motion.div variants={cardVariants} className="space-y-2">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#CCFF00] bg-[#CCFF00]/10 px-3 py-1 rounded-full border border-[#CCFF00]/30">
+          <span className="tag-neon">
             Certifications
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white pt-2 highlight-strip-neon pl-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text pt-2 highlight-strip-neon pl-4">
             Professional Learning & Badges
           </h2>
-          <p className="text-base sm:text-lg text-[#A0A6AD] max-w-2xl pt-1">
+          <p className="text-base sm:text-lg text-theme-secondary max-w-2xl pt-1">
             Continuous learning and technical certifications that complement my academic and project experience.
           </p>
         </motion.div>

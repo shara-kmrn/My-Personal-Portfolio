@@ -30,7 +30,7 @@ export const Testimonials = () => {
   return (
     <section
       id="testimonials"
-      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-[#24292E]"
+      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-theme-border"
     >
       <motion.div
         variants={containerVariants}
@@ -41,13 +41,13 @@ export const Testimonials = () => {
       >
         {/* Section Header */}
         <motion.div variants={cardVariants} className="space-y-2">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#CCFF00] bg-[#CCFF00]/10 px-3 py-1 rounded-full border border-[#CCFF00]/30">
+          <span className="tag-neon">
             Testimonials
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white pt-2 highlight-strip-neon pl-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text pt-2 highlight-strip-neon pl-4">
             What People Say
           </h2>
-          <p className="text-base sm:text-lg text-[#A0A6AD] max-w-2xl pt-1">
+          <p className="text-base sm:text-lg text-theme-secondary max-w-2xl pt-1">
             Feedback from people I have worked and collaborated with.
           </p>
         </motion.div>
@@ -59,39 +59,39 @@ export const Testimonials = () => {
               <motion.div
                 key={item.id}
                 variants={cardVariants}
-                className="h-full flex flex-col justify-between p-6 rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl space-y-6 transition-all duration-300 hover:border-[#CCFF00]/40 group"
+                className="h-full flex flex-col justify-between p-6 rounded-2xl bg-theme-card border border-theme-border shadow-xl space-y-6 transition-all duration-300 hover:border-theme-accent/40 group"
               >
                 <div className="space-y-4">
                   {/* Quote Icon */}
-                  <div className="p-2.5 rounded-xl bg-[#CCFF00]/10 text-[#CCFF00] border border-[#CCFF00]/20 w-fit group-hover:bg-[#CCFF00] group-hover:text-[#0D0F11] transition-colors">
+                  <div className="p-2.5 rounded-xl bg-theme-accent/10 text-theme-accent border border-theme-accent/20 w-fit group-hover:bg-theme-accent group-hover:text-theme-bg transition-colors">
                     <Quote className="w-5 h-5" aria-hidden="true" />
                   </div>
 
                   {/* Quote Body */}
-                  <p className="text-xs sm:text-sm text-white italic leading-relaxed">
+                  <p className="text-xs sm:text-sm text-theme-text italic leading-relaxed">
                     "{item.quote}"
                   </p>
                 </div>
 
                 {/* Author Info */}
-                <div className="pt-4 border-t border-[#24292E] flex items-center space-x-3">
+                <div className="pt-4 border-t border-theme-border flex items-center space-x-3">
                   {item.image ? (
                     <img
                       src={item.image}
                       alt={`${item.name} profile`}
-                      className="w-10 h-10 rounded-full object-cover border border-[#24292E]"
+                      className="w-10 h-10 rounded-full object-cover border border-theme-border"
                     />
                   ) : (
-                    <div className="w-10 h-10 rounded-full bg-[#0D0F11] border border-[#24292E] flex items-center justify-center text-[#CCFF00] shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-theme-bg border border-theme-border flex items-center justify-center text-theme-accent shrink-0">
                       <User className="w-5 h-5" aria-hidden="true" />
                     </div>
                   )}
                   <div>
-                    <h3 className="text-xs font-bold text-white tracking-tight">
+                    <h3 className="text-xs font-bold text-theme-text tracking-tight">
                       {item.name}
                     </h3>
                     {(item.role || item.organization) && (
-                      <p className="text-[11px] text-[#A0A6AD]">
+                      <p className="text-[11px] text-theme-secondary">
                         {[item.role, item.organization].filter(Boolean).join(' • ')}
                       </p>
                     )}
@@ -104,16 +104,16 @@ export const Testimonials = () => {
           /* Intentional Professional Empty State */
           <motion.div
             variants={cardVariants}
-            className="p-8 sm:p-12 rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl text-center flex flex-col items-center justify-center space-y-4 max-w-2xl mx-auto"
+            className="p-8 sm:p-12 rounded-2xl bg-theme-card border border-theme-border shadow-xl text-center flex flex-col items-center justify-center space-y-4 max-w-2xl mx-auto"
           >
-            <div className="w-14 h-14 rounded-2xl bg-[#CCFF00]/10 border border-[#CCFF00]/30 flex items-center justify-center text-[#CCFF00] shadow-[0_0_15px_rgba(204,255,0,0.15)]">
+            <div className="w-14 h-14 rounded-2xl bg-theme-accent/10 border border-theme-accent/30 flex items-center justify-center text-theme-accent shadow-[0_0_15px_rgba(101,163,13,0.15)]">
               <MessageSquareQuote className="w-7 h-7" aria-hidden="true" />
             </div>
             <div className="space-y-1">
-              <h3 className="text-lg font-bold text-white">
+              <h3 className="text-lg font-bold text-theme-text">
                 Testimonials & Recommendations
               </h3>
-              <p className="text-xs sm:text-sm text-[#A0A6AD] max-w-md mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm text-theme-secondary max-w-md mx-auto leading-relaxed">
                 Feedback and endorsements from project mentors, academic supervisors, and teammates will be displayed here as they are published.
               </p>
             </div>

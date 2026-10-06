@@ -27,7 +27,7 @@ export const Education = () => {
   return (
     <section
       id="education"
-      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-[#24292E]"
+      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-theme-border"
     >
       <motion.div
         variants={containerVariants}
@@ -38,10 +38,10 @@ export const Education = () => {
       >
         {/* Section Header */}
         <motion.div variants={itemVariants} className="space-y-2">
-          <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#CCFF00] bg-[#CCFF00]/10 px-3 py-1 rounded-full border border-[#CCFF00]/30">
+          <span className="tag-neon">
             Education
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white pt-2 highlight-strip-neon pl-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text pt-2 highlight-strip-neon pl-4">
             Academic Qualifications & Coursework
           </h2>
         </motion.div>
@@ -52,25 +52,25 @@ export const Education = () => {
             <motion.div
               key={item.id}
               variants={itemVariants}
-              className="p-6 sm:p-8 rounded-2xl bg-[#1A1D20] border border-[#24292E] shadow-xl space-y-6 transition-all hover:border-[#CCFF00]/30"
+              className="p-6 sm:p-8 rounded-2xl bg-theme-card border border-theme-border shadow-xl space-y-6 transition-all hover:border-theme-accent/30"
             >
               {/* Card Top: Degree & Institution Header */}
-              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 border-b border-[#24292E] pb-6">
+              <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 border-b border-theme-border pb-6">
                 <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 text-[#CCFF00] font-semibold text-sm">
+                  <div className="inline-flex items-center gap-2 text-theme-accent font-semibold text-sm">
                     <GraduationCap className="w-5 h-5 shrink-0" aria-hidden="true" />
                     <span>Higher Education</span>
                   </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                  <h3 className="text-xl sm:text-2xl font-bold text-theme-text tracking-tight">
                     {item.degree}
                   </h3>
-                  <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-[#A0A6AD]">
-                    <span className="inline-flex items-center gap-1.5 font-medium text-white">
-                      <Building2 className="w-4 h-4 text-[#CCFF00]" aria-hidden="true" />
+                  <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-theme-secondary">
+                    <span className="inline-flex items-center gap-1.5 font-medium text-theme-text">
+                      <Building2 className="w-4 h-4 text-theme-accent" aria-hidden="true" />
                       {item.institution}
                     </span>
                     {item.faculty && (
-                      <span className="text-[#A0A6AD]">
+                      <span className="text-theme-secondary">
                         • {item.faculty}
                       </span>
                     )}
@@ -79,8 +79,8 @@ export const Education = () => {
 
                 {/* Academic Period Badge */}
                 <div className="shrink-0">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#0D0F11] border border-[#24292E] text-[#A0A6AD]">
-                    <Calendar className="w-3.5 h-3.5 text-[#CCFF00]" aria-hidden="true" />
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-theme-bg border border-theme-border text-theme-secondary">
+                    <Calendar className="w-3.5 h-3.5 text-theme-accent" aria-hidden="true" />
                     {item.period}
                   </span>
                 </div>
@@ -89,17 +89,17 @@ export const Education = () => {
               {/* Coursework Section */}
               {item.coursework && item.coursework.length > 0 && (
                 <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm font-semibold text-white">
-                    <BookOpen className="w-4 h-4 text-[#CCFF00]" aria-hidden="true" />
+                  <div className="flex items-center gap-2 text-sm font-semibold text-theme-text">
+                    <BookOpen className="w-4 h-4 text-theme-accent" aria-hidden="true" />
                     <span>Relevant Coursework</span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
                     {item.coursework.map((course) => (
                       <div
                         key={course}
-                        className="flex items-center gap-2 p-2.5 rounded-lg bg-[#0D0F11]/60 border border-[#24292E] text-xs font-medium text-white"
+                        className="flex items-center gap-2 p-2.5 rounded-lg bg-theme-bg/60 border border-theme-border text-xs font-medium text-theme-text"
                       >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#CCFF00] shrink-0" aria-hidden="true" />
+                        <CheckCircle2 className="w-3.5 h-3.5 text-theme-accent shrink-0" aria-hidden="true" />
                         <span>{course}</span>
                       </div>
                     ))}

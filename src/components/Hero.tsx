@@ -3,9 +3,9 @@ import { motion } from 'motion/react'
 import { Mail, ArrowRight, Download, User } from 'lucide-react'
 
 // TODO: Replace these placeholder constants with your actual links and email address
-const GITHUB_URL = 'https://github.com'
-const LINKEDIN_URL = 'https://linkedin.com'
-const EMAIL_ADDRESS = 'mailto:rashmishara@example.com'
+const GITHUB_URL = 'https://github.com/shara-kmrn'
+const LINKEDIN_URL = 'https://www.linkedin.com/in/rashmishara-nawodani-731093349?utm_source=share_via&utm_content=profile&utm_medium=member_ios'
+const EMAIL_ADDRESS = 'mailto:[rashmishara1202@gmail.com]'
 
 // Custom Brand SVG Icons (Lucide core does not include brand logos)
 const GithubIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
@@ -82,10 +82,10 @@ export const Hero = () => {
             <span className="tag-neon">UI/UX</span>
           </motion.div>
 
-          {/* 2. Main Name (h1 in White #FFFFFF) */}
+          {/* 2. Main Name */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white"
+            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-theme-text"
           >
             Rashmi Shara
           </motion.h1>
@@ -98,10 +98,10 @@ export const Hero = () => {
             Software Engineering Undergraduate
           </motion.h2>
 
-          {/* 4. Supporting Paragraph (Faint Gray #A0A6AD) */}
+          {/* 4. Supporting Paragraph */}
           <motion.p
             variants={itemVariants}
-            className="text-base sm:text-lg text-[#A0A6AD] max-w-xl leading-relaxed"
+            className="text-base sm:text-lg text-theme-secondary max-w-xl leading-relaxed"
           >
             I'm an Information Technology undergraduate at the University of Moratuwa with a passion for building practical, user-focused software solutions and exploring modern technologies.
           </motion.p>
@@ -120,10 +120,10 @@ export const Hero = () => {
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </a>
 
-            {/* Secondary CTA Button */}
+            {/* Secondary CTA Button (Rich Dark Slate #18181B) */}
             <a
               href="#contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-white bg-[#1A1D20] hover:bg-[#24292E] border border-[#24292E] transition-colors shadow-xs focus:outline-none focus:ring-2 focus:ring-[#CCFF00] cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-xs uppercase tracking-wider btn-dark-slate focus:outline-none focus:ring-2 focus:ring-[#CCFF00] cursor-pointer shadow-xs"
             >
               <Download className="w-4 h-4 text-[#A0A6AD]" aria-hidden="true" />
               <span>Download CV</span>
@@ -141,7 +141,7 @@ export const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile (opens in new tab)"
-              className="p-2.5 rounded-lg text-[#A0A6AD] hover:text-[#CCFF00] bg-[#1A1D20] border border-[#24292E] hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+              className="p-2.5 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-card border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
             >
               <GithubIcon className="w-5 h-5" />
             </a>
@@ -152,7 +152,7 @@ export const Hero = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile (opens in new tab)"
-              className="p-2.5 rounded-lg text-[#A0A6AD] hover:text-[#CCFF00] bg-[#1A1D20] border border-[#24292E] hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+              className="p-2.5 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-card border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
             >
               <LinkedinIcon className="w-5 h-5" />
             </a>
@@ -161,7 +161,7 @@ export const Hero = () => {
             <a
               href={EMAIL_ADDRESS}
               aria-label="Send Email to Rashmi Shara"
-              className="p-2.5 rounded-lg text-[#A0A6AD] hover:text-[#CCFF00] bg-[#1A1D20] border border-[#24292E] hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+              className="p-2.5 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-card border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
             >
               <Mail className="w-5 h-5" aria-hidden="true" />
             </a>
@@ -175,8 +175,8 @@ export const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Card Background (#1A1D20) with graphic accent background shapes */}
-          <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl border border-[#24292E] bg-[#1A1D20] shadow-xl flex flex-col items-center justify-center p-6 text-center overflow-hidden group hover:border-[#CCFF00]/40 transition-colors">
+          {/* Card Background (#18181B / #FFFFFF) with graphic accent background shapes */}
+          <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl border border-theme-border bg-theme-card shadow-xl flex flex-col items-center justify-center p-6 text-center overflow-hidden group hover:border-[#CCFF00]/40 transition-colors">
             {/* Graphic shapes inside card */}
             <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#CCFF00]/20 rounded-full blur-xl group-hover:bg-[#CCFF00]/30 transition-all" />
             <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-[#CCFF00]/10 rounded-full blur-lg" />
@@ -184,8 +184,8 @@ export const Hero = () => {
             <div className="relative z-10 w-20 h-20 rounded-full bg-[#CCFF00]/10 flex items-center justify-center text-[#CCFF00] mb-3 border border-[#CCFF00]/30 shadow-[0_0_15px_rgba(204,255,0,0.2)]">
               <User className="w-10 h-10" aria-hidden="true" />
             </div>
-            <p className="relative z-10 text-sm font-bold text-white">Profile Photo</p>
-            <p className="relative z-10 text-xs text-[#A0A6AD] mt-1">Software Engineering & UI/UX</p>
+            <p className="relative z-10 text-sm font-bold text-theme-text">Profile Photo</p>
+            <p className="relative z-10 text-xs text-theme-secondary mt-1">Software Engineering & UI/UX</p>
           </div>
         </motion.div>
       </div>

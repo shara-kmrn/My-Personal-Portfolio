@@ -42,7 +42,7 @@ export const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-[#24292E]"
+      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-theme-border"
     >
       <motion.div
         variants={containerVariants}
@@ -52,15 +52,15 @@ export const Projects = () => {
         className="space-y-10"
       >
         {/* Section Header & Filter Controls */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-[#24292E] pb-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-theme-border pb-8">
           <motion.div variants={cardVariants} className="space-y-2">
-            <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#CCFF00] bg-[#CCFF00]/10 px-3 py-1 rounded-full border border-[#CCFF00]/30">
+            <span className="tag-neon">
               Projects
             </span>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-white pt-2 highlight-strip-neon pl-4">
+            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text pt-2 highlight-strip-neon pl-4">
               Featured Engineering Projects
             </h2>
-            <p className="text-base sm:text-lg text-[#A0A6AD] max-w-2xl pt-1">
+            <p className="text-base sm:text-lg text-theme-secondary max-w-2xl pt-1">
               A selection of projects where I applied software engineering concepts to build practical solutions.
             </p>
           </motion.div>
@@ -68,7 +68,7 @@ export const Projects = () => {
           {/* Category Filter Pills */}
           <motion.div
             variants={cardVariants}
-            className="flex flex-wrap gap-2 p-1.5 bg-[#1A1D20] border border-[#24292E] rounded-xl self-start md:self-auto"
+            className="flex flex-wrap gap-2 p-1.5 bg-theme-card border border-theme-border rounded-xl self-start md:self-auto"
             role="tablist"
             aria-label="Filter projects by category"
           >
@@ -81,10 +81,10 @@ export const Projects = () => {
                   role="tab"
                   aria-selected={isActive}
                   onClick={() => setActiveFilter(category)}
-                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#CCFF00] ${
+                  className={`px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-theme-accent ${
                     isActive
                       ? 'btn-neon-lime shadow-md'
-                      : 'text-[#A0A6AD] hover:text-white hover:bg-[#0D0F11]/60'
+                      : 'text-theme-secondary hover:text-theme-text hover:bg-theme-bg'
                   }`}
                 >
                   {category}
@@ -117,9 +117,9 @@ export const Projects = () => {
 
         {/* Empty Filter Fallback */}
         {filteredProjects.length === 0 && (
-          <div className="text-center py-12 bg-[#1A1D20] rounded-2xl border border-[#24292E] p-8">
-            <p className="text-sm text-[#A0A6AD]">
-              No projects found in category "<strong className="text-white">{activeFilter}</strong>".
+          <div className="text-center py-12 bg-theme-card rounded-2xl border border-theme-border p-8">
+            <p className="text-sm text-theme-secondary">
+              No projects found in category "<strong className="text-theme-text">{activeFilter}</strong>".
             </p>
           </div>
         )}
