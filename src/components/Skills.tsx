@@ -1,6 +1,32 @@
 import type { Variants } from 'motion/react'
 import { motion } from 'motion/react'
-import { Code2, Server, Database, Braces, Wrench, Layers } from 'lucide-react'
+import { Code2, Server, Database, Braces, Wrench } from 'lucide-react'
+import type { IconType } from 'react-icons'
+import {
+  SiJavascript,
+  SiTypescript,
+  SiPython,
+  SiSharp,
+  SiC,
+  SiNextdotjs,
+  SiReact,
+  SiHtml5,
+  SiCss,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiMysql,
+  SiMongodb,
+  SiPostgresql,
+  SiGit,
+  SiGithub,
+  SiJira,
+  SiPostman,
+  SiFigma,
+  SiDocker,
+} from 'react-icons/si'
+import { FaJava, FaDatabase } from 'react-icons/fa6'
+import { TbApi } from 'react-icons/tb'
 import { skillCategories } from '../data/skills'
 
 const SKILL_CATEGORY_ICONS = {
@@ -9,8 +35,34 @@ const SKILL_CATEGORY_ICONS = {
   database: Database,
   languages: Braces,
   tools: Wrench,
-  concepts: Layers,
 } as const
+
+const SKILL_ICONS: Record<string, IconType> = {
+  javascript: SiJavascript,
+  typescript: SiTypescript,
+  python: SiPython,
+  csharp: SiSharp,
+  java: FaJava,
+  c: SiC,
+  nextjs: SiNextdotjs,
+  react: SiReact,
+  html: SiHtml5,
+  css: SiCss,
+  tailwindcss: SiTailwindcss,
+  nodejs: SiNodedotjs,
+  express: SiExpress,
+  restapi: TbApi,
+  mysql: SiMysql,
+  mssql: FaDatabase,
+  mongodb: SiMongodb,
+  postgresql: SiPostgresql,
+  git: SiGit,
+  github: SiGithub,
+  agile: SiJira,
+  postman: SiPostman,
+  figma: SiFigma,
+  docker: SiDocker,
+}
 
 export const Skills = () => {
   // Animation variants
@@ -62,7 +114,7 @@ export const Skills = () => {
         {/* Categories Grid (1 col mobile, 2 cols tablet, 3 cols desktop) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
           {skillCategories.map((category) => {
-            const IconComponent = SKILL_CATEGORY_ICONS[category.iconName] || Code2
+            const IconComponent = SKILL_CATEGORY_ICONS[category.iconName as keyof typeof SKILL_CATEGORY_ICONS] || Code2
 
             return (
               <motion.div
@@ -81,15 +133,26 @@ export const Skills = () => {
                 </div>
 
                 {/* Skill Badges List */}
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {category.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1.5 rounded-lg text-xs font-semibold text-theme-secondary bg-theme-bg border border-theme-border hover:text-theme-accent hover:border-theme-accent/40 transition-all cursor-default"
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                <div className="flex flex-wrap gap-2.5 pt-1">
+                  {category.skills.map((skill) => {
+                    const SkillIcon = SKILL_ICONS[skill.iconKey]
+
+                    return (
+                      <div
+                        key={skill.name}
+                        className="inline-flex items-center gap-2 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-theme-text bg-theme-bg border border-theme-border hover:border-theme-accent/50 hover:bg-theme-bg/80 transition-all cursor-default group/badge shadow-sm"
+                      >
+                        {SkillIcon && (
+                          <SkillIcon
+                            className="w-4 h-4 sm:w-5 sm:h-5 shrink-0 group-hover/badge:scale-110 transition-transform"
+                            style={{ color: skill.color }}
+                            aria-hidden="true"
+                          />
+                        )}
+                        <span>{skill.name}</span>
+                      </div>
+                    )
+                  })}
                 </div>
               </motion.div>
             )

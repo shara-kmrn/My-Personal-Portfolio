@@ -56,29 +56,44 @@ export const Education = () => {
             >
               {/* Card Top: Degree & Institution Header */}
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 border-b border-theme-border pb-6">
-                <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 text-theme-accent font-semibold text-sm">
-                    <GraduationCap className="w-5 h-5 shrink-0" aria-hidden="true" />
-                    <span>Higher Education</span>
-                  </div>
-                  <h3 className="text-xl sm:text-2xl font-bold text-theme-text tracking-tight">
-                    {item.degree}
-                  </h3>
-                  <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-theme-secondary">
-                    <span className="inline-flex items-center gap-1.5 font-medium text-theme-text">
-                      <Building2 className="w-4 h-4 text-theme-accent" aria-hidden="true" />
-                      {item.institution}
-                    </span>
-                    {item.faculty && (
-                      <span className="text-theme-secondary">
-                        • {item.faculty}
+                <div className="flex items-start gap-4">
+                  {item.logo ? (
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white p-2 border border-theme-border flex items-center justify-center shrink-0 overflow-hidden shadow-md">
+                      <img
+                        src={item.logo}
+                        alt={`${item.institution} logo`}
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-theme-accent/10 border border-theme-accent/20 flex items-center justify-center shrink-0 text-theme-accent">
+                      <GraduationCap className="w-8 h-8" aria-hidden="true" />
+                    </div>
+                  )}
+
+                  <div className="space-y-1.5">
+                    <div className="inline-flex items-center gap-2 text-theme-accent font-semibold text-xs uppercase tracking-wider">
+                      <span>Higher Education</span>
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-bold text-theme-text tracking-tight">
+                      {item.degree}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-theme-secondary">
+                      <span className="inline-flex items-center gap-1.5 font-medium text-theme-text">
+                        <Building2 className="w-4 h-4 text-theme-accent" aria-hidden="true" />
+                        {item.institution}
                       </span>
-                    )}
+                      {item.faculty && (
+                        <span className="text-theme-secondary">
+                          • {item.faculty}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
 
                 {/* Academic Period Badge */}
-                <div className="shrink-0">
+                <div className="shrink-0 self-start md:self-auto">
                   <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-theme-bg border border-theme-border text-theme-secondary">
                     <Calendar className="w-3.5 h-3.5 text-theme-accent" aria-hidden="true" />
                     {item.period}
