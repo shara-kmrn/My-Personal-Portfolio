@@ -249,6 +249,80 @@ body {
   color: #0F172A;
 }
 
+/* Keyframe Animations for Coding Background Effects */
+@keyframes float-symbol {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(3deg);
+  }
+}
+
+@keyframes glow-drift-1 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(35px, 25px) scale(1.08);
+  }
+}
+
+@keyframes glow-drift-2 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-30px, -35px) scale(1.06);
+  }
+}
+
+@keyframes glow-drift-3 {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(25px, -20px) scale(1.1);
+  }
+}
+
+.animate-float-symbol {
+  animation: float-symbol 18s ease-in-out infinite;
+}
+
+.animate-glow-drift-1 {
+  animation: glow-drift-1 22s ease-in-out infinite;
+}
+
+.animate-glow-drift-2 {
+  animation: glow-drift-2 26s ease-in-out infinite;
+}
+
+.animate-glow-drift-3 {
+  animation: glow-drift-3 24s ease-in-out infinite;
+}
+
+@keyframes matrix-stream-down {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.3;
+  }
+  80% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.animate-matrix-stream {
+  animation: matrix-stream-down 22s linear infinite;
+}
+
 /* Hide scrollbar for Chrome, Safari, Opera & Firefox */
 .scrollbar-none {
   -ms-overflow-style: none;

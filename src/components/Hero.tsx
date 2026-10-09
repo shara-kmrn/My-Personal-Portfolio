@@ -72,7 +72,7 @@ export const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden bg-grid-lines"
+      className="relative flex items-center justify-center py-12 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden"
     >
       {/* Background Glow Accents */}
       <div className="absolute top-1/4 left-1/12 w-72 h-72 bg-theme-accent/10 rounded-full blur-3xl pointer-events-none -z-10" />

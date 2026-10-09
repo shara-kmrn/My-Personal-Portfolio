@@ -9,6 +9,7 @@ import Certifications from './components/Certifications'
 import Activities from './components/Activities'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import BackgroundEffects from './components/BackgroundEffects'
 
 function App() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -34,12 +35,15 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-theme-bg text-theme-text transition-colors duration-200 overflow-x-hidden flex flex-col justify-between">
+    <div className="relative min-h-screen bg-theme-bg text-theme-text transition-colors duration-300 overflow-x-hidden flex flex-col justify-between">
+      {/* Subtle Coding Background System & Ambient Glows */}
+      <BackgroundEffects />
+
       {/* Sticky Navigation Bar with Active Section Indicators & Theme Toggle */}
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
 
       {/* Main Content Area */}
-      <main className="pt-16 flex-1">
+      <main className="relative z-10 pt-16 flex-1">
         <Hero />
         <About />
         <Education />

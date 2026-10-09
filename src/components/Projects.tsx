@@ -42,14 +42,14 @@ export const Projects = () => {
   return (
     <section
       id="projects"
-      className="py-16 md:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-theme-border"
+      className="py-12 md:py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden border-t border-theme-border"
     >
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
-        className="space-y-10"
+        viewport={{ once: true, amount: 0.2 }}
+        className="space-y-8"
       >
         {/* Section Header & Filter Controls */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-theme-border pb-8">
