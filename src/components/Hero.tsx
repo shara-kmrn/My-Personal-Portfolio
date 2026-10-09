@@ -1,13 +1,16 @@
 import type { Variants } from 'motion/react'
 import { motion } from 'motion/react'
-import { Mail, ArrowRight, Download, User } from 'lucide-react'
+import { Mail, ArrowRight, Download, User, Terminal, Sparkles } from 'lucide-react'
+import profileImg from '../assets/profilephoto.png'
+const PROFILE_IMAGE_URL: string | null = profileImg
 
-// TODO: Replace these placeholder constants with your actual links and email address
 const GITHUB_URL = 'https://github.com/shara-kmrn'
-const LINKEDIN_URL = 'https://www.linkedin.com/in/rashmishara-nawodani-731093349?utm_source=share_via&utm_content=profile&utm_medium=member_ios'
-const EMAIL_ADDRESS = 'mailto:[rashmishara1202@gmail.com]'
+const LINKEDIN_URL = 'https://www.linkedin.com/in/rashmishara-nawodani-731093349'
+const MEDIUM_URL = 'https://medium.com/@rashmishara1202'
+const EMAIL_ADDRESS = 'mailto:rashmishara1202@gmail.com'
+const CV_URL = '/Rashmishara Nawodani SE intern.pdf'
 
-// Custom Brand SVG Icons (Lucide core does not include brand logos)
+// Custom Brand SVG Icons
 const GithubIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
   <svg
     className={className}
@@ -34,8 +37,18 @@ const LinkedinIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
   </svg>
 )
 
+const MediumIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
+  <svg
+    className={className}
+    fill="currentColor"
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM18.84 12c0 3.56-1.5 6.45-3.34 6.45s-3.34-2.89-3.34-6.45 1.5-6.45 3.34-6.45 3.34 2.89 3.34 6.45zm4.84 0c0 3.06-.5 5.54-1.12 5.54s-1.12-2.48-1.12-5.54.5-5.54 1.12-5.54 1.12 2.48 1.12 5.54z" />
+  </svg>
+)
+
 export const Hero = () => {
-  // Staggered animation variants
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -61,9 +74,9 @@ export const Hero = () => {
       id="home"
       className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-12 md:py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto overflow-x-hidden bg-grid-lines"
     >
-      {/* Graphic background shape accents (Pivlasar Hirva / Neon Lime glow) */}
-      <div className="absolute top-1/4 left-1/12 w-72 h-72 bg-[#CCFF00]/10 rounded-full blur-3xl pointer-events-none -z-10" />
-      <div className="absolute bottom-1/4 right-1/12 w-80 h-80 bg-[#CCFF00]/5 rounded-full blur-3xl pointer-events-none -z-10" />
+      {/* Background Glow Accents */}
+      <div className="absolute top-1/4 left-1/12 w-72 h-72 bg-theme-accent/10 rounded-full blur-3xl pointer-events-none -z-10" />
+      <div className="absolute bottom-1/4 right-1/12 w-80 h-80 bg-theme-accent/5 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 items-center">
         {/* Left Column — Intro & Call-To-Action */}
@@ -73,59 +86,69 @@ export const Hero = () => {
           initial="hidden"
           animate="visible"
         >
-          {/* 1. Greeting & Tags */}
-          <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-2">
-            <span className="text-xs sm:text-sm font-semibold tracking-wider uppercase text-[#CCFF00] bg-[#CCFF00]/10 px-3 py-1 rounded-full border border-[#CCFF00]/30">
-              Hello, I'm
+          {/* 1. Status Badge & Tags */}
+          <motion.div variants={itemVariants} className="flex flex-wrap items-center justify-center md:justify-start gap-2">
+            <span className="text-xs font-bold tracking-wider uppercase text-theme-accent bg-theme-accent/10 px-3 py-1 rounded-full border border-theme-accent/30 flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>Hi, I'm Rashmishara Nawodani</span>
             </span>
-            <span className="tag-neon">Product Design</span>
-            <span className="tag-neon">UI/UX</span>
+            <span className="tag-neon">IT Undergraduate @ UoM</span>
           </motion.div>
 
-          {/* 2. Main Name */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-theme-text"
-          >
-            Rashmi Shara
-          </motion.h1>
+          {/* 2. Main Name & Headline */}
+          <motion.div variants={itemVariants} className="space-y-1">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-theme-text">
+              Rashmishara <span className="text-cyber-gradient">Nawodani</span>
+            </h1>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-theme-accent tracking-tight highlight-strip-neon pl-4 mt-2">
+              Aspiring Software Engineer
+            </h2>
+          </motion.div>
 
-          {/* 3. Main Title with Highlight Strip */}
-          <motion.h2
-            variants={itemVariants}
-            className="text-xl sm:text-2xl lg:text-3xl font-semibold text-[#CCFF00] highlight-strip-neon pl-4"
-          >
-            Software Engineering Undergraduate
-          </motion.h2>
-
-          {/* 4. Supporting Paragraph */}
+          {/* 3. Short Description */}
           <motion.p
             variants={itemVariants}
             className="text-base sm:text-lg text-theme-secondary max-w-xl leading-relaxed"
           >
-            I'm an Information Technology undergraduate at the University of Moratuwa with a passion for building practical, user-focused software solutions and exploring modern technologies.
+            I am an Information Technology undergraduate at the University of Moratuwa with a passion for software development, problem-solving, and building intuitive, practical digital experiences.
           </motion.p>
+
+          {/* 4. Code-Inspired Accent Snippet */}
+          <motion.div
+            variants={itemVariants}
+            className="p-3 rounded-xl bg-theme-card/80 border border-theme-border font-mono text-xs text-theme-secondary flex items-center gap-3 shadow-sm max-w-md w-full sm:w-auto"
+          >
+            <Terminal className="w-4 h-4 text-theme-accent shrink-0" />
+            <div className="flex items-center gap-2 overflow-hidden text-ellipsis whitespace-nowrap">
+              <span className="text-theme-accent font-semibold">status:</span>
+              <span className="text-theme-text font-medium">Ready for Software Engineering Internships</span>
+            </div>
+          </motion.div>
 
           {/* 5. CTA Buttons */}
           <motion.div
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center gap-3.5 pt-2 w-full sm:w-auto"
           >
-            {/* Primary CTA Button (Pivlasar Hirva / Neon Lime #CCFF00) */}
+            {/* Primary CTA Button (Cyber Cyan-to-Purple Gradient) */}
             <a
               href="#projects"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-bold text-xs uppercase tracking-wider btn-neon-lime focus:outline-none focus:ring-2 focus:ring-[#CCFF00] cursor-pointer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider btn-neon-lime focus:outline-none focus:ring-2 focus:ring-theme-accent cursor-pointer"
             >
-              <span>View My Projects</span>
+              <span>Explore My Projects</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </a>
 
-            {/* Secondary CTA Button (Rich Dark Slate #18181B) */}
+            {/* Secondary CTA Button */}
             <a
-              href="#contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-medium text-xs uppercase tracking-wider btn-dark-slate focus:outline-none focus:ring-2 focus:ring-[#CCFF00] cursor-pointer shadow-xs"
+              href={CV_URL}
+              download="Rashmishara Nawodani SE intern.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download Rashmishara Nawodani's CV (PDF)"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-semibold text-xs uppercase tracking-wider btn-dark-slate focus:outline-none focus:ring-2 focus:ring-theme-accent cursor-pointer"
             >
-              <Download className="w-4 h-4 text-[#A0A6AD]" aria-hidden="true" />
+              <Download className="w-4 h-4" aria-hidden="true" />
               <span>Download CV</span>
             </a>
           </motion.div>
@@ -135,57 +158,73 @@ export const Hero = () => {
             variants={itemVariants}
             className="flex items-center gap-3 pt-2"
           >
-            {/* GitHub Link */}
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub Profile (opens in new tab)"
-              className="p-2.5 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-card border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+              className="p-3 rounded-full text-theme-secondary hover:text-theme-accent bg-theme-card border border-theme-border hover:border-theme-accent/40 transition-all focus:outline-none focus:ring-2 focus:ring-theme-accent"
             >
               <GithubIcon className="w-5 h-5" />
             </a>
 
-            {/* LinkedIn Link */}
             <a
               href={LINKEDIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn Profile (opens in new tab)"
-              className="p-2.5 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-card border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+              className="p-3 rounded-full text-theme-secondary hover:text-theme-accent bg-theme-card border border-theme-border hover:border-theme-accent/40 transition-all focus:outline-none focus:ring-2 focus:ring-theme-accent"
             >
               <LinkedinIcon className="w-5 h-5" />
             </a>
 
-            {/* Email Link */}
+            <a
+              href={MEDIUM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Medium Profile (opens in new tab)"
+              className="p-3 rounded-full text-theme-secondary hover:text-theme-accent bg-theme-card border border-theme-border hover:border-theme-accent/40 transition-all focus:outline-none focus:ring-2 focus:ring-theme-accent"
+            >
+              <MediumIcon className="w-5 h-5" />
+            </a>
+
             <a
               href={EMAIL_ADDRESS}
-              aria-label="Send Email to Rashmi Shara"
-              className="p-2.5 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-card border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+              aria-label="Send Email to Rashmishara Nawodani"
+              className="p-3 rounded-full text-theme-secondary hover:text-theme-accent bg-theme-card border border-theme-border hover:border-theme-accent/40 transition-all focus:outline-none focus:ring-2 focus:ring-theme-accent"
             >
               <Mail className="w-5 h-5" aria-hidden="true" />
             </a>
           </motion.div>
         </motion.div>
 
-        {/* Right Column — Profile Image & Graphic Frame */}
+        {/* Right Column — Circular Cyber Glowing Profile Avatar (matching image) */}
         <motion.div
           className="md:col-span-5 flex justify-center items-center mt-6 md:mt-0"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.5, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Card Background (#18181B / #FFFFFF) with graphic accent background shapes */}
-          <div className="relative w-60 h-60 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl border border-theme-border bg-theme-card shadow-xl flex flex-col items-center justify-center p-6 text-center overflow-hidden group hover:border-[#CCFF00]/40 transition-colors">
-            {/* Graphic shapes inside card */}
-            <div className="absolute -top-12 -right-12 w-32 h-32 bg-[#CCFF00]/20 rounded-full blur-xl group-hover:bg-[#CCFF00]/30 transition-all" />
-            <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-[#CCFF00]/10 rounded-full blur-lg" />
-
-            <div className="relative z-10 w-20 h-20 rounded-full bg-[#CCFF00]/10 flex items-center justify-center text-[#CCFF00] mb-3 border border-[#CCFF00]/30 shadow-[0_0_15px_rgba(204,255,0,0.2)]">
-              <User className="w-10 h-10" aria-hidden="true" />
+          {/* Cyber Glowing Outer Ring */}
+          <div className="relative p-1.5 rounded-full cyber-avatar-ring group transition-all duration-500">
+            {/* Inner Profile Image Frame */}
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-84 lg:h-84 rounded-full border-2 border-theme-border/80 bg-theme-card overflow-hidden flex flex-col items-center justify-center shadow-2xl">
+              {PROFILE_IMAGE_URL ? (
+                <img
+                  src={PROFILE_IMAGE_URL}
+                  alt="Rashmishara Nawodani - Profile Photo"
+                  className="w-full h-full object-cover rounded-full group-hover:scale-105 transition-transform duration-500 relative z-10"
+                />
+              ) : (
+                <div className="relative z-10 p-6 flex flex-col items-center justify-center text-center">
+                  <div className="w-24 h-24 rounded-full bg-theme-accent/10 flex items-center justify-center text-theme-accent mb-3 border border-theme-accent/30 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <User className="w-12 h-12" aria-hidden="true" />
+                  </div>
+                  <p className="text-base font-bold text-theme-text">Rashmishara Nawodani</p>
+                  <p className="text-xs font-medium text-theme-secondary mt-1">Aspiring Software Engineer</p>
+                </div>
+              )}
             </div>
-            <p className="relative z-10 text-sm font-bold text-theme-text">Profile Photo</p>
-            <p className="relative z-10 text-xs text-theme-secondary mt-1">Software Engineering & UI/UX</p>
           </div>
         </motion.div>
       </div>

@@ -44,7 +44,7 @@ export const Footer = () => {
               href="#home"
               className="text-xl font-bold tracking-tight text-theme-accent hover:opacity-90 transition-opacity"
             >
-              Rashmi Shara
+              Rashmishara Nawodani
             </a>
             <p className="text-xs text-theme-secondary">
               Software Engineering Undergraduate
@@ -67,7 +67,7 @@ export const Footer = () => {
 
         {/* Bottom Bar: Copyright & Socials */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-theme-secondary">
-          <p>© {currentYear} Rashmi Shara. All rights reserved.</p>
+          <p>© {currentYear} Rashmishara Nawodani. All rights reserved.</p>
 
           {/* Social Icons (rendered only if valid URLs are set) */}
           {(hasGithub || hasLinkedin) && (

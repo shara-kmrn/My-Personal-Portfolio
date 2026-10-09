@@ -11,12 +11,22 @@ import Contact from './components/Contact'
 import Footer from './components/Footer'
 
 function App() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('theme')
+      if (saved === 'light' || saved === 'dark') {
+        return saved
+      }
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    }
+    return 'dark'
+  })
 
   useEffect(() => {
     const root = document.documentElement
     root.classList.remove('light', 'dark')
     root.classList.add(theme)
+    localStorage.setItem('theme', theme)
   }, [theme])
 
   const toggleTheme = () => {
@@ -25,37 +35,22 @@ function App() {
 
   return (
     <div className="min-h-screen bg-theme-bg text-theme-text transition-colors duration-200 overflow-x-hidden flex flex-col justify-between">
-      {/* Fixed Navigation Bar with Theme Toggle Icon */}
+      {/* Sticky Navigation Bar with Active Section Indicators & Theme Toggle */}
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
 
       {/* Main Content Area */}
       <main className="pt-16 flex-1">
-        {/* Phase 3 Hero Section */}
         <Hero />
-
-        {/* Phase 4 About Section */}
         <About />
-
-        {/* Phase 4 Education Section */}
         <Education />
-
-        {/* Phase 5 Skills Section */}
         <Skills />
-
-        {/* Phase 6 Projects Section */}
         <Projects />
-
-        {/* Phase 7 Certifications Section */}
         <Certifications />
-
-        {/* Phase 8 Activities & Leadership Section */}
         <Activities />
-
-        {/* Phase 10 Contact Section */}
         <Contact />
       </main>
 
-      {/* Phase 10 Footer Component */}
+      {/* Footer Component */}
       <Footer />
     </div>
   )

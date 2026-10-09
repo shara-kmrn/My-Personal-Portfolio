@@ -2,7 +2,7 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import type { Variants } from 'motion/react'
 import { motion } from 'motion/react'
-import { Mail, Send, CheckCircle2, AlertCircle } from 'lucide-react'
+import { Mail, Phone, Copy, Check, Globe, MessageSquare, AlertCircle } from 'lucide-react'
 import { contactInfo } from '../data/contact'
 
 const GithubIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
@@ -21,80 +21,77 @@ const LinkedinIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
   </svg>
 )
 
+const MediumIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM18.84 12c0 3.56-1.5 6.45-3.34 6.45s-3.34-2.89-3.34-6.45 1.5-6.45 3.34-6.45 3.34 2.89 3.34 6.45zm4.84 0c0 3.06-.5 5.54-1.12 5.54s-1.12-2.48-1.12-5.54.5-5.54 1.12-5.54 1.12 2.48 1.12 5.54z" />
+  </svg>
+)
+
 interface FormData {
   name: string
   email: string
+  subject: string
   message: string
-}
-
-interface FormErrors {
-  name?: string
-  email?: string
-  message?: string
 }
 
 export const Contact = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     email: '',
+    subject: '',
     message: '',
   })
-  const [errors, setErrors] = useState<FormErrors>({})
+  const [copiedField, setCopiedField] = useState<string | null>(null)
   const [statusMessage, setStatusMessage] = useState<string | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; message?: string }>({})
 
-  // Form Validation logic
-  const validate = (): boolean => {
-    const newErrors: FormErrors = {}
-
-    if (!formData.name.trim()) {
-      newErrors.name = 'Please enter your name.'
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Please enter your email address.'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
-      newErrors.email = 'Please enter a valid email address.'
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Please enter a message.'
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+  const handleCopy = (text: string, fieldName: string) => {
+    navigator.clipboard.writeText(text)
+    setCopiedField(fieldName)
+    setTimeout(() => setCopiedField(null), 2000)
   }
 
-  const handleSubmit = (e: FormEvent) => {
+  const validateForm = () => {
+    const errors: { name?: string; message?: string } = {}
+    if (!formData.name.trim()) errors.name = 'Please enter your name.'
+    if (!formData.message.trim()) errors.message = 'Please enter a message.'
+    setFieldErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
+  const handleSendWhatsApp = () => {
+    if (!validateForm()) return
+
+    const textMsg = `Hello Rashmishara Nawodani,\n\nName: ${formData.name}\nEmail: ${formData.email || 'N/A'}\nSubject: ${formData.subject || 'General Inquiry'}\n\nMessage:\n${formData.message}`
+    const encodedText = encodeURIComponent(textMsg)
+    const whatsappUrl = `https://wa.me/${contactInfo.whatsappNumber}?text=${encodedText}`
+    window.open(whatsappUrl, '_blank')
+  }
+
+  const handleSendEmail = (e: FormEvent) => {
     e.preventDefault()
-    setStatusMessage(null)
+    if (!validateForm()) return
 
-    if (validate()) {
-      // Clear form inputs and show clear status message
-      setFormData({ name: '', email: '', message: '' })
-      setErrors({})
-      setStatusMessage(
-        'Thanks for reaching out! The contact form is currently being prepared for email delivery.'
-      )
-    }
+    const mailSubject = encodeURIComponent(formData.subject || `Portfolio Contact from ${formData.name}`)
+    const mailBody = encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email || 'N/A'}\n\nMessage:\n${formData.message}`
+    )
+    window.location.href = `mailto:${contactInfo.email}?subject=${mailSubject}&body=${mailBody}`
+    setStatusMessage('Thank you! Opening your email client to dispatch the message.')
   }
-
-  const hasEmail = Boolean(contactInfo.email && contactInfo.email.trim())
-  const hasGithub = Boolean(contactInfo.github && contactInfo.github.trim() && contactInfo.github !== '#')
-  const hasLinkedin = Boolean(contactInfo.linkedin && contactInfo.linkedin.trim() && contactInfo.linkedin !== '#')
-  const hasSocials = hasEmail || hasGithub || hasLinkedin
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
+        staggerChildren: 0.1,
         delayChildren: 0.05,
       },
     },
   }
 
-  const cardVariants: Variants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
@@ -113,207 +110,260 @@ export const Contact = () => {
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}
-        className="space-y-12"
+        className="space-y-10"
       >
         {/* Section Header */}
-        <motion.div variants={cardVariants} className="space-y-2">
-          <span className="tag-neon">
-            Get In Touch
-          </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-theme-text pt-2 highlight-strip-neon pl-4">
-            Let's Connect
+        <motion.div variants={itemVariants} className="space-y-2">
+          <span className="tag-neon">Get In Touch</span>
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-theme-text flex items-center gap-2 pt-2 highlight-strip-neon pl-4">
+            <span>Contact Me</span>
+            <span className="inline-block w-2.5 h-2.5 rounded-full bg-theme-accent animate-pulse" />
           </h2>
-          <p className="text-base sm:text-lg text-theme-secondary max-w-2xl pt-1">
-            I'm always open to connecting with fellow developers, collaborators, and opportunities. Feel free to reach out.
-          </p>
         </motion.div>
 
-        {/* Desktop 2-Column Grid */}
+        {/* 2-Column Main Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-          {/* Left Column: Intro & Contact Links */}
-          <motion.div variants={cardVariants} className="lg:col-span-5 space-y-6">
-            <div className="p-6 sm:p-8 rounded-2xl bg-theme-card border border-theme-border shadow-xl space-y-6">
-              <div className="space-y-2">
-                <h3 className="text-xl font-bold text-theme-text tracking-tight">
-                  Contact Information
-                </h3>
-                <p className="text-xs sm:text-sm text-theme-secondary leading-relaxed">
-                  Have a project idea, question, or opportunity? Fill out the form or reach out through my verified channels.
-                </p>
+          {/* Left Column */}
+          <motion.div variants={itemVariants} className="lg:col-span-5 space-y-6">
+            {/* Description Paragraph */}
+            <p className="text-sm sm:text-base text-theme-secondary leading-relaxed">
+              I'm an Information Technology undergraduate at the University of Moratuwa. Whether you have an internship opportunity, a project to discuss, or just want to connect, I would love to hear from you.
+            </p>
+
+            {/* Direct Contact Copy Bars */}
+            <div className="space-y-3">
+              {/* Email Copy Bar */}
+              <div className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-theme-card border border-theme-border text-xs sm:text-sm font-medium text-theme-text shadow-md group hover:border-theme-accent/40 transition-colors">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="p-2 rounded-lg bg-theme-accent/10 text-theme-accent shrink-0">
+                    <Mail className="w-4 h-4" />
+                  </div>
+                  <span className="truncate">{contactInfo.email}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(contactInfo.email, 'email')}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-theme-bg border border-theme-border hover:border-theme-accent text-xs font-semibold text-theme-secondary hover:text-theme-text transition-colors cursor-pointer shrink-0"
+                >
+                  {copiedField === 'email' ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-theme-accent" />
+                      <span className="text-theme-accent">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
               </div>
 
-              {/* Render contact info items ONLY if non-empty */}
-              {hasSocials ? (
-                <div className="space-y-3 pt-2">
-                  {hasEmail && (
-                    <a
-                      href={`mailto:${contactInfo.email}`}
-                      className="flex items-center gap-3 p-3 rounded-xl bg-theme-bg border border-theme-border text-xs font-semibold text-theme-text hover:text-theme-accent hover:border-theme-accent/40 transition-colors"
-                    >
-                      <div className="p-2 rounded-lg bg-theme-accent/10 text-theme-accent shrink-0">
-                        <Mail className="w-4 h-4" />
-                      </div>
-                      <span className="truncate">{contactInfo.email}</span>
-                    </a>
-                  )}
-
-                  {hasGithub && (
-                    <a
-                      href={contactInfo.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-xl bg-theme-bg border border-theme-border text-xs font-semibold text-theme-text hover:text-theme-accent hover:border-theme-accent/40 transition-colors"
-                    >
-                      <div className="p-2 rounded-lg bg-theme-accent/10 text-theme-accent shrink-0">
-                        <GithubIcon className="w-4 h-4" />
-                      </div>
-                      <span>GitHub Profile</span>
-                    </a>
-                  )}
-
-                  {hasLinkedin && (
-                    <a
-                      href={contactInfo.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-3 p-3 rounded-xl bg-theme-bg border border-theme-border text-xs font-semibold text-theme-text hover:text-theme-accent hover:border-theme-accent/40 transition-colors"
-                    >
-                      <div className="p-2 rounded-lg bg-theme-accent/10 text-theme-accent shrink-0">
-                        <LinkedinIcon className="w-4 h-4" />
-                      </div>
-                      <span>LinkedIn Profile</span>
-                    </a>
-                  )}
+              {/* Phone Copy Bar */}
+              <div className="flex items-center justify-between gap-3 p-3.5 rounded-xl bg-theme-card border border-theme-border text-xs sm:text-sm font-medium text-theme-text shadow-md group hover:border-theme-accent/40 transition-colors">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="p-2 rounded-lg bg-theme-accent/10 text-theme-accent shrink-0">
+                    <Phone className="w-4 h-4" />
+                  </div>
+                  <span>{contactInfo.phone}</span>
                 </div>
-              ) : (
-                <div className="p-4 rounded-xl bg-theme-bg/60 border border-theme-border text-xs text-theme-secondary leading-relaxed">
-                  Direct email and social links will be added once verified. In the meantime, please send a message using the form.
-                </div>
+                <button
+                  type="button"
+                  onClick={() => handleCopy(contactInfo.phone, 'phone')}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-theme-bg border border-theme-border hover:border-theme-accent text-xs font-semibold text-theme-secondary hover:text-theme-text transition-colors cursor-pointer shrink-0"
+                >
+                  {copiedField === 'phone' ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-theme-accent" />
+                      <span className="text-theme-accent">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* Circular Social Icons Bar */}
+            <div className="flex items-center gap-3 pt-2">
+              {contactInfo.github && (
+                <a
+                  href={contactInfo.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
+                  className="p-3 rounded-full bg-theme-card border border-theme-border text-theme-text hover:border-theme-accent hover:text-theme-accent transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
+                >
+                  <GithubIcon className="w-5 h-5" />
+                </a>
+              )}
+
+              {contactInfo.linkedin && (
+                <a
+                  href={contactInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
+                  className="p-3 rounded-full bg-theme-card border border-theme-border text-theme-text hover:border-theme-accent hover:text-theme-accent transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
+                >
+                  <LinkedinIcon className="w-5 h-5" />
+                </a>
+              )}
+
+              {contactInfo.medium && (
+                <a
+                  href={contactInfo.medium}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Medium Profile"
+                  className="p-3 rounded-full bg-theme-card border border-theme-border text-theme-text hover:border-theme-accent hover:text-theme-accent transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
+                >
+                  <MediumIcon className="w-5 h-5" />
+                </a>
+              )}
+
+              {contactInfo.website && (
+                <a
+                  href={contactInfo.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Personal Website"
+                  className="p-3 rounded-full bg-theme-card border border-theme-border text-theme-text hover:border-theme-accent hover:text-theme-accent transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
+                >
+                  <Globe className="w-5 h-5" />
+                </a>
               )}
             </div>
           </motion.div>
 
-          {/* Right Column: Contact Form */}
-          <motion.div variants={cardVariants} className="lg:col-span-7">
-            <form
-              onSubmit={handleSubmit}
-              noValidate
-              className="p-6 sm:p-8 rounded-2xl bg-theme-card border border-theme-border shadow-xl space-y-5"
-            >
-              {/* Full Name Field */}
-              <div className="space-y-1.5">
-                <label
-                  htmlFor="contact-name"
-                  className="block text-xs font-bold uppercase tracking-wider text-theme-text"
-                >
-                  Full Name <span className="text-theme-accent">*</span>
-                </label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  aria-invalid={Boolean(errors.name)}
-                  aria-describedby={errors.name ? 'name-error' : undefined}
-                  placeholder="Your Name"
-                  className={`w-full px-4 py-3 rounded-xl bg-theme-bg border text-sm text-theme-text placeholder:text-theme-secondary focus:outline-none transition-colors ${
-                    errors.name
-                      ? 'border-red-500 focus:border-red-500'
-                      : 'border-theme-border focus:border-theme-accent'
-                  }`}
-                />
-                {errors.name && (
-                  <p id="name-error" className="text-xs text-red-400 flex items-center gap-1 mt-1">
-                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                    <span>{errors.name}</span>
-                  </p>
-                )}
+          {/* Right Column: Send a Message Card */}
+          <motion.div variants={itemVariants} className="lg:col-span-7">
+            <div className="p-6 sm:p-8 rounded-2xl bg-theme-card border border-theme-border shadow-2xl space-y-6">
+              {/* Form Title */}
+              <div className="space-y-1">
+                <h3 className="text-xl sm:text-2xl font-bold text-theme-text tracking-tight flex items-center gap-2">
+                  <span>Send a Message</span>
+                  <span className="w-2 h-2 rounded-full bg-theme-accent" />
+                </h3>
+                <p className="text-xs sm:text-sm text-theme-secondary">
+                  Fill in the details below and select your preferred communication channel.
+                </p>
               </div>
 
-              {/* Email Address Field */}
-              <div className="space-y-1.5">
-                <label
-                  htmlFor="contact-email"
-                  className="block text-xs font-bold uppercase tracking-wider text-theme-text"
-                >
-                  Email Address <span className="text-theme-accent">*</span>
-                </label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  aria-invalid={Boolean(errors.email)}
-                  aria-describedby={errors.email ? 'email-error' : undefined}
-                  placeholder="name@example.com"
-                  className={`w-full px-4 py-3 rounded-xl bg-theme-bg border text-sm text-theme-text placeholder:text-theme-secondary focus:outline-none transition-colors ${
-                    errors.email
-                      ? 'border-red-500 focus:border-red-500'
-                      : 'border-theme-border focus:border-theme-accent'
-                  }`}
-                />
-                {errors.email && (
-                  <p id="email-error" className="text-xs text-red-400 flex items-center gap-1 mt-1">
-                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                    <span>{errors.email}</span>
-                  </p>
-                )}
-              </div>
-
-              {/* Message Field */}
-              <div className="space-y-1.5">
-                <label
-                  htmlFor="contact-message"
-                  className="block text-xs font-bold uppercase tracking-wider text-theme-text"
-                >
-                  Message <span className="text-theme-accent">*</span>
-                </label>
-                <textarea
-                  id="contact-message"
-                  required
-                  rows={4}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  aria-invalid={Boolean(errors.message)}
-                  aria-describedby={errors.message ? 'message-error' : undefined}
-                  placeholder="How can I help you?"
-                  className={`w-full px-4 py-3 rounded-xl bg-theme-bg border text-sm text-theme-text placeholder:text-theme-secondary focus:outline-none transition-colors resize-none ${
-                    errors.message
-                      ? 'border-red-500 focus:border-red-500'
-                      : 'border-theme-border focus:border-theme-accent'
-                  }`}
-                />
-                {errors.message && (
-                  <p id="message-error" className="text-xs text-red-400 flex items-center gap-1 mt-1">
-                    <AlertCircle className="w-3.5 h-3.5 shrink-0" />
-                    <span>{errors.message}</span>
-                  </p>
-                )}
-              </div>
-
-              {/* Submit Button */}
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider btn-neon-lime focus:outline-none focus:ring-2 focus:ring-theme-accent cursor-pointer"
-              >
-                <span>Send Message</span>
-                <Send className="w-4 h-4" aria-hidden="true" />
-              </button>
-
-              {/* Submission Status Notice */}
-              {statusMessage && (
-                <div
-                  role="status"
-                  aria-live="polite"
-                  className="p-4 rounded-xl bg-theme-accent/10 border border-theme-accent/30 flex items-start gap-3 text-xs text-theme-text"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-theme-accent shrink-0 mt-0.5" aria-hidden="true" />
-                  <p className="leading-relaxed">{statusMessage}</p>
+              {/* Form Fields */}
+              <form onSubmit={handleSendEmail} className="space-y-4">
+                {/* Your Name */}
+                <div className="space-y-1.5">
+                  <label htmlFor="contact-name" className="block text-xs font-semibold text-theme-text">
+                    Your Name <span className="text-theme-accent">*</span>
+                  </label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    placeholder="e.g. Jane Doe"
+                    className="w-full px-4 py-3 rounded-xl bg-theme-bg border border-theme-border text-sm text-theme-text placeholder:text-theme-secondary/60 focus:outline-none focus:border-theme-accent transition-colors"
+                  />
+                  {fieldErrors.name && (
+                    <p className="text-xs text-red-400 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      <span>{fieldErrors.name}</span>
+                    </p>
+                  )}
                 </div>
-              )}
-            </form>
+
+                {/* Your Email */}
+                <div className="space-y-1.5">
+                  <label htmlFor="contact-email" className="block text-xs font-semibold text-theme-text">
+                    Your Email
+                  </label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    placeholder="name@example.com"
+                    className="w-full px-4 py-3 rounded-xl bg-theme-bg border border-theme-border text-sm text-theme-text placeholder:text-theme-secondary/60 focus:outline-none focus:border-theme-accent transition-colors"
+                  />
+                </div>
+
+                {/* Subject */}
+                <div className="space-y-1.5">
+                  <label htmlFor="contact-subject" className="block text-xs font-semibold text-theme-text">
+                    Subject
+                  </label>
+                  <input
+                    id="contact-subject"
+                    type="text"
+                    value={formData.subject}
+                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                    placeholder="e.g. Internship Opportunity / Collaboration"
+                    className="w-full px-4 py-3 rounded-xl bg-theme-bg border border-theme-border text-sm text-theme-text placeholder:text-theme-secondary/60 focus:outline-none focus:border-theme-accent transition-colors"
+                  />
+                </div>
+
+                {/* Message */}
+                <div className="space-y-1.5">
+                  <label htmlFor="contact-message" className="block text-xs font-semibold text-theme-text">
+                    Message <span className="text-theme-accent">*</span>
+                  </label>
+                  <textarea
+                    id="contact-message"
+                    required
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    placeholder="Hello Rashmishara Nawodani, I'd like to get in touch regarding..."
+                    className="w-full px-4 py-3 rounded-xl bg-theme-bg border border-theme-border text-sm text-theme-text placeholder:text-theme-secondary/60 focus:outline-none focus:border-theme-accent transition-colors resize-none"
+                  />
+                  {fieldErrors.message && (
+                    <p className="text-xs text-red-400 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      <span>{fieldErrors.message}</span>
+                    </p>
+                  )}
+                </div>
+
+                {/* Dual Dispatch Buttons: Send via WhatsApp & Send via Email */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  {/* WhatsApp Button */}
+                  <button
+                    type="button"
+                    onClick={handleSendWhatsApp}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider btn-neon-lime cursor-pointer shadow-lg"
+                  >
+                    <MessageSquare className="w-4 h-4" />
+                    <span>Send via WhatsApp</span>
+                  </button>
+
+                  {/* Email Button */}
+                  <button
+                    type="submit"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider btn-dark-slate cursor-pointer shadow-lg"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>Send via Email</span>
+                  </button>
+                </div>
+
+                {/* Status Notice */}
+                {statusMessage && (
+                  <p className="text-xs text-theme-accent font-medium pt-1 text-center">
+                    {statusMessage}
+                  </p>
+                )}
+
+                {/* Footer Note */}
+                <p className="text-[11px] text-center text-theme-secondary pt-2">
+                  I respect your time and typically respond within 24 hours.
+                </p>
+              </form>
+            </div>
           </motion.div>
         </div>
       </motion.div>

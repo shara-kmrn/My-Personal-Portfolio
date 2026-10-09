@@ -3,30 +3,10 @@
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 
-  /* Brand Accent Tokens */
-  --color-brand: #CCFF00;
-  --color-brand-accent: #CCFF00;
-  --color-lime-accent: #65A30D;
-  --color-neon-lime: #CCFF00;
-  --color-neon-hover: #D4FF00;
-
-  /* User Specified Light Theme Palette Tokens */
-  --color-light-bg: #FAFAF7;          /* Background #FAFAF7 */
-  --color-light-card: #FFFFFF;        /* Surface/Card #FFFFFF */
-  --color-light-primary-green: #65A30D; /* Primary Green #65A30D */
-  --color-light-hover-green: #4D7C0F;   /* Hover Green #4D7C0F */
-  --color-light-text-main: #18181B;    /* Main Text #18181B */
-  --color-light-text-secondary: #52525B; /* Secondary Text #52525B */
-  --color-light-border: #E4E4E7;      /* Border #E4E4E7 */
-  --color-light-accent: #F0FDF4;      /* Light Accent #F0FDF4 */
-
-  /* Dark Theme Tokens */
-  --color-dark-bg: #0D0F11;
-  --color-dark-card: #18181B;
-  --color-dark-text: #FFFFFF;
-  --color-dark-text-secondary: #A0A6AD;
-  --color-dark-accent: #CCFF00;
-  --color-dark-border: #24292E;
+  /* Cyber Theme Palette Tokens */
+  --color-cyber-cyan: #00F2FE;
+  --color-cyber-blue: #3B82F6;
+  --color-cyber-purple: #8B5CF6;
 
   /* Dynamic Theme Tokens */
   --color-theme-bg: var(--theme-bg);
@@ -39,41 +19,41 @@
   --color-theme-light-accent: var(--theme-light-accent);
 }
 
-/* CSS Theme Variables for Dark (default) & Light mode support */
+/* CSS Theme Variables for Dark (CyberStack) & Light mode */
 :root {
-  --theme-bg: #FAFAF7;           /* Background #FAFAF7 */
-  --theme-text-primary: #18181B;  /* Main Text #18181B */
-  --theme-text-secondary: #52525B;/* Secondary Text #52525B */
-  --theme-accent: #65A30D;        /* Primary Green #65A30D */
-  --theme-accent-hover: #4D7C0F;  /* Hover Green #4D7C0F */
-  --theme-card: #FFFFFF;          /* Surface/Card #FFFFFF */
-  --theme-border: #E4E4E7;        /* Border #E4E4E7 */
-  --theme-light-accent: #F0FDF4;  /* Light Accent #F0FDF4 */
-  --theme-grid: rgba(0, 0, 0, 0.04);
+  --theme-bg: #090A15;
+  --theme-text-primary: #FFFFFF;
+  --theme-text-secondary: #94A3B8;
+  --theme-accent: #00F2FE;
+  --theme-accent-hover: #38BDF8;
+  --theme-card: #121426;
+  --theme-border: #1E223D;
+  --theme-light-accent: rgba(0, 242, 254, 0.1);
+  --theme-grid: rgba(0, 242, 254, 0.04);
 }
 
 .dark {
-  --theme-bg: #0D0F11;
+  --theme-bg: #090A15;           /* Deep midnight navy/indigo background */
   --theme-text-primary: #FFFFFF;
-  --theme-text-secondary: #A0A6AD;
-  --theme-accent: #CCFF00;
-  --theme-accent-hover: #D4FF00;
-  --theme-card: #18181B;
-  --theme-border: #24292E;
-  --theme-light-accent: rgba(204, 255, 0, 0.1);
-  --theme-grid: rgba(204, 255, 0, 0.05);
+  --theme-text-secondary: #94A3B8;/* Cool slate cyan-grey body text */
+  --theme-accent: #00F2FE;        /* Electric Cyan primary accent */
+  --theme-accent-hover: #38BDF8;
+  --theme-card: #121426;          /* Deep indigo charcoal card surface */
+  --theme-border: #1E223D;        /* Subtle dark indigo border */
+  --theme-light-accent: rgba(0, 242, 254, 0.1);
+  --theme-grid: rgba(0, 242, 254, 0.04);
 }
 
 .light {
-  --theme-bg: #FAFAF7;           /* Background #FAFAF7 */
-  --theme-text-primary: #18181B;  /* Main Text #18181B */
-  --theme-text-secondary: #52525B;/* Secondary Text #52525B */
-  --theme-accent: #65A30D;        /* Primary Green #65A30D */
-  --theme-accent-hover: #4D7C0F;  /* Hover Green #4D7C0F */
-  --theme-card: #FFFFFF;          /* Surface/Card #FFFFFF */
-  --theme-border: #E4E4E7;        /* Border #E4E4E7 */
-  --theme-light-accent: #F0FDF4;  /* Light Accent #F0FDF4 */
-  --theme-grid: rgba(0, 0, 0, 0.04);
+  --theme-bg: #F8FAFC;           /* Off-white cool slate background */
+  --theme-text-primary: #0F172A;  /* Deep midnight navy text */
+  --theme-text-secondary: #475569;/* Cool slate secondary text */
+  --theme-accent: #0284C7;        /* Refined cyan-blue primary accent */
+  --theme-accent-hover: #0369A1;
+  --theme-card: #FFFFFF;          /* Pure white card surface */
+  --theme-border: #E2E8F0;        /* Light slate border */
+  --theme-light-accent: #F0F9FF;
+  --theme-grid: rgba(2, 132, 199, 0.04);
 }
 
 /* Base Global Styles */
@@ -85,7 +65,7 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 4.5rem;
+  scroll-padding-top: 5rem;
   font-family: var(--font-sans);
 }
 
@@ -99,24 +79,56 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   min-height: 100vh;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
-/* Grid Lines & Decorative Background Shapes */
+/* Accessible focus visible outlines */
+:focus-visible {
+  outline: 2px solid var(--theme-accent);
+  outline-offset: 2px;
+}
+
+/* Cyber Gradient Text Highlight */
+.text-cyber-gradient {
+  background: linear-gradient(135deg, #00F2FE 0%, #3B82F6 50%, #8B5CF6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.light .text-cyber-gradient {
+  background: linear-gradient(135deg, #0284C7 0%, #2563EB 50%, #7C3AED 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Cyber Glow Ring for Profile Avatar */
+.cyber-avatar-ring {
+  padding: 3px;
+  background: linear-gradient(135deg, #00F2FE 0%, #3B82F6 50%, #7000FF 100%);
+  box-shadow: 0 0 30px rgba(0, 242, 254, 0.4), 0 0 50px rgba(112, 0, 255, 0.25);
+}
+
+.light .cyber-avatar-ring {
+  padding: 3px;
+  background: linear-gradient(135deg, #0284C7 0%, #2563EB 50%, #7C3AED 100%);
+  box-shadow: 0 6px 25px rgba(2, 132, 199, 0.3);
+}
+
+/* Grid Lines & Cyber Ambient Background Glows */
 .bg-grid-lines {
   background-size: 40px 40px;
   background-image: 
-    linear-gradient(to right, rgba(0, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(0, 242, 254, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 242, 254, 0.035) 1px, transparent 1px);
 }
 
-.dark .bg-grid-lines {
+.light .bg-grid-lines {
   background-image: 
-    linear-gradient(to right, rgba(204, 255, 0, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(204, 255, 0, 0.035) 1px, transparent 1px);
+    linear-gradient(to right, rgba(2, 132, 199, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(2, 132, 199, 0.035) 1px, transparent 1px);
 }
 
-/* Highlight Strip with Neon Lime #CCFF00 */
+/* Highlight Strip with Cyan-to-Purple Gradient */
 .highlight-strip-neon {
   position: relative;
 }
@@ -127,102 +139,114 @@ body {
   top: 0;
   bottom: 0;
   width: 4px;
-  background: #CCFF00;
+  background: linear-gradient(to bottom, #00F2FE, #8B5CF6);
   border-top-left-radius: 4px;
   border-bottom-left-radius: 4px;
-  box-shadow: 0 0 10px rgba(204, 255, 0, 0.5);
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.5);
 }
 
 .light .highlight-strip-neon::before {
-  background: #65A30D;
-  box-shadow: 0 0 10px rgba(101, 163, 13, 0.35);
+  background: linear-gradient(to bottom, #0284C7, #7C3AED);
+  box-shadow: 0 0 10px rgba(2, 132, 199, 0.35);
 }
 
-/* Neon Tag styling (#CCFF00) */
+/* Neon Tag styling (matching CyberStack "Full Stack Developer" tag) */
 .tag-neon {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.75rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #CCFF00;
-  background-color: rgba(204, 255, 0, 0.1);
-  border: 1px solid rgba(204, 255, 0, 0.3);
+  color: #00F2FE;
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.3);
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.15);
 }
 
 .light .tag-neon {
-  color: #65A30D;
-  background-color: #F0FDF4;
-  border-color: #DCFCE7;
+  color: #0284C7;
+  background-color: #F0F9FF;
+  border-color: #BAE6FD;
+  box-shadow: none;
 }
 
-/* Lime Accent Tag styling (#84CC16) */
+/* Lime Accent Tag styling (Secondary pill) */
 .tag-lime-accent {
   display: inline-flex;
   align-items: center;
-  padding: 0.25rem 0.75rem;
+  padding: 0.35rem 0.85rem;
   border-radius: 9999px;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #84CC16;
-  background-color: rgba(132, 204, 22, 0.1);
-  border: 1px solid rgba(132, 204, 22, 0.3);
+  color: #8B5CF6;
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.3);
 }
 
 .light .tag-lime-accent {
-  color: #65A30D;
-  background-color: #F0FDF4;
-  border-color: #DCFCE7;
+  color: #7C3AED;
+  background-color: #F5F3FF;
+  border-color: #DDD6FE;
 }
 
-/* Primary Neon Lime Button (#CCFF00) */
+/* Primary Gradient Button ("View Projects" in image) */
 .btn-neon-lime {
-  background-color: #CCFF00;
-  color: #0D0F11;
+  background: linear-gradient(135deg, #00F2FE 0%, #3B82F6 50%, #7000FF 100%);
+  color: #FFFFFF;
   font-weight: 700;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 0 15px rgba(204, 255, 0, 0.25);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 20px rgba(0, 242, 254, 0.35), 0 0 35px rgba(112, 0, 255, 0.25);
+  border: none;
 }
 
 .light .btn-neon-lime {
-  background-color: #65A30D;
+  background: linear-gradient(135deg, #0284C7 0%, #2563EB 50%, #7C3AED 100%);
   color: #FFFFFF;
-  box-shadow: 0 2px 10px rgba(101, 163, 13, 0.25);
+  box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
 }
 
 .btn-neon-lime:hover {
-  background-color: #D4FF00;
-  box-shadow: 0 0 25px rgba(204, 255, 0, 0.45);
+  background: linear-gradient(135deg, #38BDF8 0%, #60A5FA 50%, #8B5CF6 100%);
+  box-shadow: 0 0 30px rgba(0, 242, 254, 0.55), 0 0 45px rgba(139, 92, 246, 0.4);
   transform: translateY(-1px);
 }
 
 .light .btn-neon-lime:hover {
-  background-color: #4D7C0F;
-  box-shadow: 0 4px 15px rgba(77, 124, 15, 0.35);
+  background: linear-gradient(135deg, #0369A1 0%, #1D4ED8 50%, #6D28D9 100%);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.4);
 }
 
-/* Rich Dark Slate Button / Primary CTA (#18181B) */
+/* Secondary Button ("Hire Me" / "Download CV" in image) */
 .btn-dark-slate {
-  background-color: #18181B;
+  background-color: #121426;
   color: #FFFFFF;
-  border: 1px solid #24292E;
+  border: 1px solid #282B4E;
   font-weight: 600;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+.light .btn-dark-slate {
+  background-color: #F1F5F9;
+  color: #0F172A;
+  border-color: #CBD5E1;
+}
+
 .btn-dark-slate:hover {
-  background-color: #27272A;
-  border-color: #CCFF00;
+  background-color: #1A1D36;
+  border-color: #00F2FE;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
   transform: translateY(-1px);
 }
 
 .light .btn-dark-slate:hover {
-  border-color: #65A30D;
+  background-color: #E2E8F0;
+  border-color: #0284C7;
+  color: #0F172A;
 }
 
 /* Hide scrollbar for Chrome, Safari, Opera & Firefox */
@@ -232,4 +256,16 @@ body {
 }
 .scrollbar-none::-webkit-scrollbar {
   display: none;
+}
+
+/* Respect Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

@@ -22,7 +22,6 @@ interface ProjectCardProps {
 }
 
 export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
-  // Extract project initials for placeholder artwork
   const initials = project.title
     .split(' ')
     .map((word) => word[0])
@@ -32,15 +31,15 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
   const isIoT = project.category === 'IoT'
 
   return (
-    <div className="h-full flex flex-col justify-between rounded-2xl bg-theme-card border border-theme-border shadow-xl overflow-hidden transition-all duration-300 hover:border-[#CCFF00]/40 hover:shadow-[0_0_25px_rgba(204,255,0,0.08)] group">
+    <div className="h-full flex flex-col justify-between rounded-2xl bg-theme-card border border-theme-border shadow-xl overflow-hidden transition-all duration-300 hover:border-theme-accent/50 hover:shadow-2xl group">
       {/* Top Visual Area / Placeholder Banner */}
       <div className="relative h-48 w-full bg-theme-bg/90 border-b border-theme-border flex items-center justify-center overflow-hidden">
         {/* Background Grid Pattern */}
         <div className="absolute inset-0 bg-grid-lines opacity-60" />
         
         {/* Glowing Decorative Shapes */}
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#CCFF00]/10 rounded-full blur-2xl group-hover:bg-[#CCFF00]/25 transition-all duration-300" />
-        <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-[#CCFF00]/5 rounded-full blur-xl" />
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-theme-accent/10 rounded-full blur-2xl group-hover:bg-theme-accent/25 transition-all duration-300" />
+        <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-theme-accent/5 rounded-full blur-xl" />
 
         {/* Visual Content: Image or Styled Placeholder Graphic */}
         {project.image ? (
@@ -51,10 +50,10 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
           />
         ) : (
           <div className="relative z-10 flex flex-col items-center justify-center text-center p-4">
-            <div className="w-16 h-16 rounded-2xl bg-[#CCFF00]/10 border border-[#CCFF00]/30 flex items-center justify-center text-[#CCFF00] font-black text-xl tracking-wider shadow-[0_0_15px_rgba(204,255,0,0.15)] mb-2 group-hover:scale-110 transition-transform">
+            <div className="w-16 h-16 rounded-2xl bg-theme-accent/10 border border-theme-accent/30 flex items-center justify-center text-theme-accent font-black text-xl tracking-wider shadow-md mb-2 group-hover:scale-110 transition-transform">
               {isIoT ? <Cpu className="w-8 h-8" /> : <Code2 className="w-8 h-8" />}
             </div>
-            <span className="text-xs font-bold uppercase tracking-widest text-[#CCFF00]/90">
+            <span className="text-xs font-bold uppercase tracking-widest text-theme-accent">
               {project.title} ({initials})
             </span>
           </div>
@@ -79,7 +78,7 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
         <div className="space-y-3">
           {/* Header & Title */}
           <div>
-            <h3 className="text-xl font-bold text-theme-text tracking-tight group-hover:text-[#CCFF00] transition-colors">
+            <h3 className="text-xl font-bold text-theme-text tracking-tight group-hover:text-theme-accent transition-colors">
               {project.title}
             </h3>
             {project.fullName && (
@@ -92,7 +91,7 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
           {/* Role Pill if available */}
           {project.role && (
             <div className="inline-flex items-center gap-1.5 text-xs text-theme-secondary bg-theme-bg/60 px-2.5 py-1 rounded-md border border-theme-border">
-              <UserCheck className="w-3.5 h-3.5 text-[#CCFF00]" aria-hidden="true" />
+              <UserCheck className="w-3.5 h-3.5 text-theme-accent" aria-hidden="true" />
               <span>Role: <strong className="text-theme-text font-semibold">{project.role}</strong></span>
             </div>
           )}
@@ -110,7 +109,7 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
             <ul className="space-y-1 text-xs text-theme-text">
               {project.features.slice(0, 3).map((feature) => (
                 <li key={feature} className="flex items-start gap-1.5 leading-snug">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-[#CCFF00] shrink-0 mt-0.5" aria-hidden="true" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-theme-accent shrink-0 mt-0.5" aria-hidden="true" />
                   <span className="truncate">{feature}</span>
                 </li>
               ))}
@@ -131,7 +130,7 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
               </span>
             ))}
             {project.technologies.length > 4 && (
-              <span className="px-2 py-1 rounded-md text-[11px] font-semibold text-[#CCFF00] bg-[#CCFF00]/10 border border-[#CCFF00]/20">
+              <span className="px-2 py-1 rounded-md text-[11px] font-semibold text-theme-accent bg-theme-accent/10 border border-theme-accent/20">
                 +{project.technologies.length - 4} more
               </span>
             )}
@@ -139,37 +138,34 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
 
           {/* Action Buttons */}
           <div className="flex items-center gap-2 pt-1">
-            {/* View Details Button */}
             <button
               type="button"
               onClick={() => onSelectProject(project)}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider btn-neon-lime cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider btn-neon-lime cursor-pointer focus:outline-none focus:ring-2 focus:ring-theme-accent"
             >
               <Info className="w-3.5 h-3.5" aria-hidden="true" />
               <span>View Details</span>
             </button>
 
-            {/* Optional GitHub Button */}
             {project.githubUrl && project.githubUrl !== '#' && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.title} source code on GitHub`}
-                className="p-2 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-bg border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+                className="p-2.5 rounded-xl text-theme-secondary hover:text-theme-accent bg-theme-bg border border-theme-border hover:border-theme-accent/40 transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
               >
                 <GithubIcon className="w-4 h-4" />
               </a>
             )}
 
-            {/* Optional Live Demo Button */}
             {project.liveUrl && project.liveUrl !== '#' && (
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View live demo of ${project.title}`}
-                className="p-2 rounded-lg text-theme-secondary hover:text-[#CCFF00] bg-theme-bg border border-theme-border hover:border-[#CCFF00]/40 transition-colors focus:outline-none focus:ring-2 focus:ring-[#CCFF00]"
+                className="p-2.5 rounded-xl text-theme-secondary hover:text-theme-accent bg-theme-bg border border-theme-border hover:border-theme-accent/40 transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
               >
                 <ExternalLink className="w-4 h-4" />
               </a>
