@@ -1,5 +1,5 @@
 import type { Project } from '../data/projects'
-import { ExternalLink, Info, Code2, Cpu, CheckCircle2, UserCheck } from 'lucide-react'
+import { ExternalLink, Info, Code2, Cpu, CheckCircle2 } from 'lucide-react'
 
 const GithubIcon = ({ className = 'w-4 h-4' }: { className?: string }) => (
   <svg
@@ -32,21 +32,21 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
 
   return (
     <div className="h-full flex flex-col justify-between rounded-2xl bg-theme-card border border-theme-border shadow-xl overflow-hidden transition-all duration-300 hover:border-theme-accent/50 hover:shadow-2xl group">
-      {/* Top Visual Area / Placeholder Banner */}
-      <div className="relative h-48 w-full bg-theme-bg/90 border-b border-theme-border flex items-center justify-center overflow-hidden">
+      {/* Top Visual Area / Full-Bleed Cover Image Banner */}
+      <div className="relative h-56 sm:h-64 w-full bg-theme-bg border-b border-theme-border flex items-center justify-center overflow-hidden">
         {/* Background Grid Pattern */}
-        <div className="absolute inset-0 bg-grid-lines opacity-60" />
+        <div className="absolute inset-0 bg-grid-lines opacity-40 z-0" />
         
         {/* Glowing Decorative Shapes */}
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-theme-accent/10 rounded-full blur-2xl group-hover:bg-theme-accent/25 transition-all duration-300" />
-        <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-theme-accent/5 rounded-full blur-xl" />
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-theme-accent/10 rounded-full blur-2xl group-hover:bg-theme-accent/25 transition-all duration-300 pointer-events-none" />
+        <div className="absolute -bottom-10 -left-10 w-28 h-28 bg-theme-accent/5 rounded-full blur-xl pointer-events-none" />
 
-        {/* Visual Content: Image or Styled Placeholder Graphic */}
+        {/* Visual Content: Full-Bleed Image or Styled Placeholder Graphic */}
         {project.image ? (
           <img
             src={project.image}
             alt={`${project.title} screenshot`}
-            className="w-full h-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
           />
         ) : (
           <div className="relative z-10 flex flex-col items-center justify-center text-center p-4">
@@ -66,7 +66,18 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
           </span>
         </div>
 
-        <div className="absolute top-3 right-3 z-20">
+        <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5">
+          {project.period && (
+            <span
+              className={`px-2.5 py-1 rounded-full text-[10px] font-semibold border backdrop-blur-xs ${
+                project.period.toLowerCase().includes('ongoing')
+                  ? 'bg-amber-500/15 text-amber-300 border-amber-500/40 shadow-xs'
+                  : 'text-theme-secondary bg-theme-card/90 border-theme-border'
+              }`}
+            >
+              {project.period}
+            </span>
+          )}
           <span className="px-2.5 py-1 rounded-full text-[10px] font-semibold text-theme-secondary bg-theme-card/90 border border-theme-border backdrop-blur-xs">
             {project.type}
           </span>
@@ -88,13 +99,6 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
             )}
           </div>
 
-          {/* Role Pill if available */}
-          {project.role && (
-            <div className="inline-flex items-center gap-1.5 text-xs text-theme-secondary bg-theme-bg/60 px-2.5 py-1 rounded-md border border-theme-border">
-              <UserCheck className="w-3.5 h-3.5 text-theme-accent" aria-hidden="true" />
-              <span>Role: <strong className="text-theme-text font-semibold">{project.role}</strong></span>
-            </div>
-          )}
 
           {/* Short Description */}
           <p className="text-xs sm:text-sm text-theme-secondary line-clamp-2 leading-relaxed">
@@ -147,13 +151,43 @@ export const ProjectCard = ({ project, onSelectProject }: ProjectCardProps) => {
               <span>View Details</span>
             </button>
 
-            {project.githubUrl && project.githubUrl !== '#' && (
+            {/* Separate GitHub Repositories (Frontend / Backend) */}
+            {project.githubFrontendUrl && project.githubFrontendUrl !== '#' && (
+              <a
+                href={project.githubFrontendUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Frontend Repository"
+                aria-label={`View ${project.title} frontend source code on GitHub`}
+                className="inline-flex items-center gap-1 px-2.5 py-2.5 rounded-xl text-theme-secondary hover:text-theme-accent bg-theme-bg border border-theme-border hover:border-theme-accent/40 transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent shrink-0"
+              >
+                <GithubIcon className="w-4 h-4" />
+                <span className="text-[10px] font-bold tracking-tight">FE</span>
+              </a>
+            )}
+
+            {project.githubBackendUrl && project.githubBackendUrl !== '#' && (
+              <a
+                href={project.githubBackendUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Backend Repository"
+                aria-label={`View ${project.title} backend source code on GitHub`}
+                className="inline-flex items-center gap-1 px-2.5 py-2.5 rounded-xl text-theme-secondary hover:text-theme-accent bg-theme-bg border border-theme-border hover:border-theme-accent/40 transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent shrink-0"
+              >
+                <GithubIcon className="w-4 h-4" />
+                <span className="text-[10px] font-bold tracking-tight">BE</span>
+              </a>
+            )}
+
+            {/* Single GitHub Repository fallback */}
+            {!project.githubFrontendUrl && !project.githubBackendUrl && project.githubUrl && project.githubUrl !== '#' && (
               <a
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`View ${project.title} source code on GitHub`}
-                className="p-2.5 rounded-xl text-theme-secondary hover:text-theme-accent bg-theme-bg border border-theme-border hover:border-theme-accent/40 transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent"
+                className="p-2.5 rounded-xl text-theme-secondary hover:text-theme-accent bg-theme-bg border border-theme-border hover:border-theme-accent/40 transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent shrink-0"
               >
                 <GithubIcon className="w-4 h-4" />
               </a>

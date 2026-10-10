@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
-import { X, CheckCircle2, UserCheck, ShieldAlert, Cpu, ExternalLink, Sparkles, Layers } from 'lucide-react'
+import { X, CheckCircle2, ShieldAlert, Cpu, ExternalLink, Sparkles, Layers, Image as ImageIcon } from 'lucide-react'
 import type { Project } from '../data/projects'
 
 const GithubIcon = ({ className = 'w-4 h-4' }: { className?: string }) => (
@@ -86,6 +86,17 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
                   <span className="text-xs font-semibold text-theme-secondary">
                     {project.type}
                   </span>
+                  {project.period && (
+                    <span
+                      className={`text-[11px] px-2.5 py-0.5 rounded-full font-semibold border ${
+                        project.period.toLowerCase().includes('ongoing')
+                          ? 'bg-amber-500/15 text-amber-300 border-amber-500/40'
+                          : 'text-theme-secondary bg-theme-bg/60 border-theme-border'
+                      }`}
+                    >
+                      {project.period}
+                    </span>
+                  )}
                 </div>
                 <h2
                   id="modal-project-title"
@@ -114,11 +125,14 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
 
             {/* Scrollable Body Content */}
             <div className="p-5 sm:p-6 overflow-y-auto space-y-6 flex-1 text-xs sm:text-sm leading-relaxed">
-              {/* My Role */}
-              {project.role && (
-                <div className="inline-flex items-center gap-2 p-3 rounded-xl bg-theme-bg/80 border border-theme-border text-theme-text">
-                  <UserCheck className="w-4 h-4 text-theme-accent" aria-hidden="true" />
-                  <span>Role: <strong className="text-theme-accent font-semibold">{project.role}</strong></span>
+              {/* Project Preview Image */}
+              {project.image && (
+                <div className="relative w-full h-64 sm:h-80 rounded-xl overflow-hidden border border-theme-border bg-theme-bg shadow-md">
+                  <img
+                    src={project.image}
+                    alt={`${project.title} preview`}
+                    className="w-full h-full object-cover object-top"
+                  />
                 </div>
               )}
 
@@ -150,7 +164,33 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
                 </div>
               </div>
 
-              {/* Contribution Highlight (if available) */}
+              {/* Key Engineering Highlights */}
+              {project.highlights && project.highlights.length > 0 && (
+                <div className="space-y-3 pt-1">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-theme-accent flex items-center gap-1.5">
+                    <Sparkles className="w-4 h-4" />
+                    <span>Key Engineering Highlights & Innovation</span>
+                  </h3>
+                  <div className="grid grid-cols-1 gap-2.5">
+                    {project.highlights.map((item, index) => (
+                      <div
+                        key={index}
+                        className="p-3.5 rounded-xl bg-theme-accent/5 border border-theme-accent/20 space-y-1 hover:border-theme-accent/30 transition-colors"
+                      >
+                        <div className="text-xs font-bold text-theme-accent flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 rounded-full bg-theme-accent" />
+                          <span>{item.title}</span>
+                        </div>
+                        <p className="text-xs text-theme-text/90 leading-relaxed pl-3.5">
+                          {item.desc}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Specific Contribution */}
               {project.contribution && (
                 <div className="p-4 rounded-xl bg-theme-accent/10 border border-theme-accent/30 space-y-1.5">
                   <div className="flex items-center gap-2 text-theme-accent font-bold text-xs uppercase tracking-wider">
@@ -222,12 +262,60 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
                   </div>
                 </div>
               )}
+
+              {/* Photo Gallery (for projects with multiple photos like BLIMAS) */}
+              {project.gallery && project.gallery.length > 1 && (
+                <div className="space-y-2 pt-2">
+                  <h3 className="text-xs font-bold uppercase tracking-wider text-theme-accent flex items-center gap-1.5">
+                    <ImageIcon className="w-4 h-4" />
+                    <span>Project Photo Gallery ({project.gallery.length})</span>
+                  </h3>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                    {project.gallery.map((img, idx) => (
+                      <div
+                        key={idx}
+                        className="rounded-xl overflow-hidden border border-theme-border bg-theme-bg/60 h-24 sm:h-28 group relative shadow-xs"
+                      >
+                        <img
+                          src={img}
+                          alt={`${project.title} gallery item ${idx + 1}`}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Modal Footer / Action Bar */}
             <div className="p-5 border-t border-theme-border bg-theme-bg/80 flex flex-wrap items-center justify-between gap-3">
-              <div className="flex items-center gap-2">
-                {project.githubUrl && project.githubUrl !== '#' ? (
+              <div className="flex flex-wrap items-center gap-2">
+                {project.githubFrontendUrl && project.githubFrontendUrl !== '#' && (
+                  <a
+                    href={project.githubFrontendUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider btn-dark-slate focus:outline-none focus:ring-2 focus:ring-theme-accent"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                    <span>GitHub Frontend</span>
+                  </a>
+                )}
+
+                {project.githubBackendUrl && project.githubBackendUrl !== '#' && (
+                  <a
+                    href={project.githubBackendUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-bold uppercase tracking-wider btn-dark-slate focus:outline-none focus:ring-2 focus:ring-theme-accent"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                    <span>GitHub Backend</span>
+                  </a>
+                )}
+
+                {project.githubUrl && project.githubUrl !== '#' && !project.githubFrontendUrl && !project.githubBackendUrl ? (
                   <a
                     href={project.githubUrl}
                     target="_blank"

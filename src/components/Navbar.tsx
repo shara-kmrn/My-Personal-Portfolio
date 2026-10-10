@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Sun, Moon, Code2 } from 'lucide-react'
+import { Menu, X, Sun, Moon } from 'lucide-react'
+import { Logo } from './Logo'
 
 interface NavItem {
   label: string
@@ -81,19 +82,15 @@ export const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
           {/* Brand Name & Icon Logo */}
           <a
             href="#home"
-            className="flex items-center gap-2 group text-lg sm:text-xl font-extrabold tracking-tight text-theme-text hover:text-theme-accent transition-colors focus:outline-none focus:ring-2 focus:ring-theme-accent rounded-md"
+            className="flex items-center focus:outline-none focus:ring-2 focus:ring-theme-accent rounded-xl"
             onClick={handleLinkClick}
+            aria-label="Rashmishara Nawodani Home"
           >
-            <div className="p-1.5 rounded-lg bg-theme-accent/10 border border-theme-accent/30 text-theme-accent group-hover:bg-theme-accent group-hover:text-theme-bg transition-colors">
-              <Code2 className="w-4 h-4 sm:w-5 sm:h-5" />
-            </div>
-            <span>
-              Rashmishara <span className="text-theme-accent">Nawodani</span>
-            </span>
+            <Logo showText={true} iconSize="md" />
           </a>
 
           {/* Desktop Navigation Links & Theme Toggle Button */}
-          <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
+          <div className="hidden md:flex items-center space-x-1 lg:space-x-1.5">
             {NAV_ITEMS.map((item) => {
               const sectionId = item.href.substring(1)
               const isActive = activeSection === sectionId
@@ -103,10 +100,10 @@ export const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
                   key={item.label}
                   href={item.href}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`px-3 py-1.5 text-xs lg:text-sm font-semibold rounded-lg transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-theme-accent ${
+                  className={`px-3 py-1.5 text-xs lg:text-sm font-semibold rounded-full transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-theme-accent ${
                     isActive
-                      ? 'text-theme-accent bg-theme-accent/10 border border-theme-accent/30'
-                      : 'text-theme-secondary hover:text-theme-text hover:bg-theme-card'
+                      ? 'text-[#00E5FF] bg-[#00E5FF]/10 border border-[#00E5FF]/40 shadow-[0_0_12px_rgba(0,229,255,0.25)]'
+                      : 'text-theme-secondary hover:text-theme-text hover:bg-theme-card/60'
                   }`}
                 >
                   {item.label}
@@ -118,12 +115,12 @@ export const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
             <button
               type="button"
               onClick={onToggleTheme}
-              className="ml-2 p-2 rounded-xl bg-theme-card border border-theme-border text-theme-text hover:text-theme-accent hover:border-theme-accent transition-all focus:outline-none focus:ring-2 focus:ring-theme-accent cursor-pointer shadow-xs"
+              className="ml-2 p-2 rounded-full bg-theme-card border border-theme-border text-theme-text hover:text-[#00E5FF] hover:border-[#00E5FF]/50 transition-all focus:outline-none focus:ring-2 focus:ring-[#00E5FF] cursor-pointer shadow-xs"
               aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
             >
               {theme === 'light' ? (
-                <Moon className="w-4 h-4 text-slate-700 hover:text-emerald-600 transition-colors" />
+                <Moon className="w-4 h-4 text-slate-700 hover:text-sky-600 transition-colors" />
               ) : (
                 <Sun className="w-4 h-4 text-amber-400 hover:text-amber-300 transition-colors" />
               )}

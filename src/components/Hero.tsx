@@ -98,10 +98,10 @@ export const Hero = () => {
           {/* 2. Main Name & Headline */}
           <motion.div variants={itemVariants} className="space-y-1">
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-theme-text">
-              Rashmishara <span className="text-cyber-gradient">Nawodani</span>
+              Rashmishara <span className="text-brand-gradient">Nawodani</span>
             </h1>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-theme-accent tracking-tight highlight-strip-neon pl-4 mt-2">
-              Aspiring Software Engineer
+              IT Undergraduate
             </h2>
           </motion.div>
 
@@ -130,7 +130,7 @@ export const Hero = () => {
             variants={itemVariants}
             className="flex flex-col sm:flex-row items-center gap-3.5 pt-2 w-full sm:w-auto"
           >
-            {/* Primary CTA Button (Cyber Cyan-to-Purple Gradient) */}
+            {/* Primary CTA Button (Gradient Accent) */}
             <a
               href="#projects"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full font-bold text-xs uppercase tracking-wider btn-neon-lime focus:outline-none focus:ring-2 focus:ring-theme-accent cursor-pointer"
@@ -198,15 +198,15 @@ export const Hero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right Column — Circular Cyber Glowing Profile Avatar (matching image) */}
+        {/* Right Column — Circular Profile Avatar */}
         <motion.div
           className="md:col-span-5 flex justify-center items-center mt-6 md:mt-0"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
         >
-          {/* Cyber Glowing Outer Ring */}
-          <div className="relative p-1.5 rounded-full cyber-avatar-ring group transition-all duration-500">
+          {/* Glowing Outer Ring */}
+          <div className="relative p-1.5 rounded-full avatar-glow-ring group transition-all duration-500">
             {/* Inner Profile Image Frame */}
             <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-84 lg:h-84 rounded-full border-2 border-theme-border/80 bg-theme-card overflow-hidden flex flex-col items-center justify-center shadow-2xl">
               {PROFILE_IMAGE_URL ? (

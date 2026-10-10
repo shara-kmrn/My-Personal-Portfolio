@@ -3,10 +3,10 @@
 @theme {
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 
-  /* Cyber Theme Palette Tokens */
-  --color-cyber-cyan: #00F2FE;
-  --color-cyber-blue: #3B82F6;
-  --color-cyber-purple: #8B5CF6;
+  /* Brand Palette Tokens */
+  --color-brand-cyan: #00F2FE;
+  --color-brand-blue: #3B82F6;
+  --color-brand-purple: #8B5CF6;
 
   /* Dynamic Theme Tokens */
   --color-theme-bg: var(--theme-bg);
@@ -19,7 +19,7 @@
   --color-theme-light-accent: var(--theme-light-accent);
 }
 
-/* CSS Theme Variables for Dark (CyberStack) & Light mode */
+/* CSS Theme Variables for Dark & Light mode */
 :root {
   --theme-bg: #090A15;
   --theme-text-primary: #FFFFFF;
@@ -88,33 +88,33 @@ body {
   outline-offset: 2px;
 }
 
-/* Cyber Gradient Text Highlight */
-.text-cyber-gradient {
+/* Gradient Text Highlight */
+.text-brand-gradient {
   background: linear-gradient(135deg, #00F2FE 0%, #3B82F6 50%, #8B5CF6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.light .text-cyber-gradient {
+.light .text-brand-gradient {
   background: linear-gradient(135deg, #0284C7 0%, #2563EB 50%, #7C3AED 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Cyber Glow Ring for Profile Avatar */
-.cyber-avatar-ring {
+/* Glow Ring for Profile Avatar */
+.avatar-glow-ring {
   padding: 3px;
   background: linear-gradient(135deg, #00F2FE 0%, #3B82F6 50%, #7000FF 100%);
   box-shadow: 0 0 30px rgba(0, 242, 254, 0.4), 0 0 50px rgba(112, 0, 255, 0.25);
 }
 
-.light .cyber-avatar-ring {
+.light .avatar-glow-ring {
   padding: 3px;
   background: linear-gradient(135deg, #0284C7 0%, #2563EB 50%, #7C3AED 100%);
   box-shadow: 0 6px 25px rgba(2, 132, 199, 0.3);
 }
 
-/* Grid Lines & Cyber Ambient Background Glows */
+/* Ambient Grid Lines */
 .bg-grid-lines {
   background-size: 40px 40px;
   background-image: 
@@ -150,7 +150,7 @@ body {
   box-shadow: 0 0 10px rgba(2, 132, 199, 0.35);
 }
 
-/* Neon Tag styling (matching CyberStack "Full Stack Developer" tag) */
+/* Neon Tag styling */
 .tag-neon {
   display: inline-flex;
   align-items: center;

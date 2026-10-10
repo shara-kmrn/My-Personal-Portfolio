@@ -1,4 +1,5 @@
 import { contactInfo } from '../data/contact'
+import { Logo } from './Logo'
 
 const GithubIcon = ({ className = 'w-4 h-4' }: { className?: string }) => (
   <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -39,15 +40,16 @@ export const Footer = () => {
         {/* Top Footer Grid */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-8 border-b border-theme-border">
           {/* Brand Info */}
-          <div className="space-y-1">
+          <div className="space-y-1.5">
             <a
               href="#home"
-              className="text-xl font-bold tracking-tight text-theme-accent hover:opacity-90 transition-opacity"
+              className="inline-block focus:outline-none focus:ring-2 focus:ring-theme-accent rounded-xl"
+              aria-label="Rashmishara Nawodani Home"
             >
-              Rashmishara Nawodani
+              <Logo showText={true} iconSize="md" />
             </a>
-            <p className="text-xs text-theme-secondary">
-              3rd Year IT Undergraduate @ UoM
+            <p className="text-xs text-theme-secondary pl-0.5">
+              3rd Year IT Undergraduate @ University of Moratuwa
             </p>
           </div>
 
