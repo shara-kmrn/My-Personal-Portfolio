@@ -24,7 +24,7 @@ export const About = () => {
   }
 
   const highlights = [
-    { icon: GraduationCap, label: 'IT Undergraduate' },
+    { icon: GraduationCap, label: '3rd Year IT Undergraduate' },
     { icon: UserCheck, label: 'Software Engineering Focus' },
     { icon: Compass, label: 'Full-Stack Development' },
     { icon: Lightbulb, label: 'Continuous Learner' },
@@ -85,7 +85,7 @@ export const About = () => {
           <motion.div variants={itemVariants} className="lg:col-span-7 space-y-6">
             <div className="space-y-4 text-base sm:text-lg text-theme-secondary leading-relaxed">
               <p>
-                I'm an Information Technology undergraduate at the University of Moratuwa with a strong interest in software engineering and building practical, user-focused applications. I enjoy turning ideas into functional solutions while continuously learning new technologies and improving my problem-solving skills.
+                I'm a 3rd year Information Technology undergraduate at the University of Moratuwa with a strong interest in software engineering and building practical, user-focused applications. I enjoy turning ideas into functional solutions while continuously learning new technologies and improving my problem-solving skills.
               </p>
               <p>
                 My interests include full-stack web development, application design, UI/UX design, and exploring modern software technologies. Through academic and personal projects, I have gained hands-on experience in developing applications, working with databases and APIs, and collaborating as part of software development teams.

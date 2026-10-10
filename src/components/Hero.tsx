@@ -92,7 +92,7 @@ export const Hero = () => {
               <Sparkles className="w-3.5 h-3.5" aria-hidden="true" />
               <span>Hi, I'm Rashmishara Nawodani</span>
             </span>
-            <span className="tag-neon">IT Undergraduate @ UoM</span>
+            <span className="tag-neon">3rd Year IT Undergraduate @ UoM</span>
           </motion.div>
 
           {/* 2. Main Name & Headline */}
@@ -110,7 +110,7 @@ export const Hero = () => {
             variants={itemVariants}
             className="text-base sm:text-lg text-theme-secondary max-w-xl leading-relaxed"
           >
-            I am an Information Technology undergraduate at the University of Moratuwa with a passion for software development, problem-solving, and building intuitive, practical digital experiences.
+            I am a 3rd year Information Technology undergraduate at the University of Moratuwa with a passion for software development, problem-solving, and building intuitive, practical digital experiences.
           </motion.p>
 
           {/* 4. Code-Inspired Accent Snippet */}

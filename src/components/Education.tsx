@@ -72,9 +72,6 @@ export const Education = () => {
                   )}
 
                   <div className="space-y-1.5">
-                    <div className="inline-flex items-center gap-2 text-theme-accent font-semibold text-xs uppercase tracking-wider">
-                      <span>Higher Education</span>
-                    </div>
                     <h3 className="text-xl sm:text-2xl font-bold text-theme-text tracking-tight">
                       {item.degree}
                     </h3>
@@ -109,7 +106,7 @@ export const Education = () => {
                     <span>Relevant Coursework</span>
                   </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-                    {item.coursework.map((course) => (
+                    {item.coursework.filter((c) => Boolean(c && c.trim())).map((course) => (
                       <div
                         key={course}
                         className="flex items-center gap-2 p-2.5 rounded-lg bg-theme-bg/60 border border-theme-border text-xs font-medium text-theme-text"

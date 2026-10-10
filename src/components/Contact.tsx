@@ -127,7 +127,7 @@ export const Contact = () => {
           <motion.div variants={itemVariants} className="lg:col-span-5 space-y-6">
             {/* Description Paragraph */}
             <p className="text-sm sm:text-base text-theme-secondary leading-relaxed">
-              I'm an Information Technology undergraduate at the University of Moratuwa. Whether you have an internship opportunity, a project to discuss, or just want to connect, I would love to hear from you.
+              I'm a 3rd year Information Technology undergraduate at the University of Moratuwa. Whether you have an internship opportunity, a project to discuss, or just want to connect, I would love to hear from you.
             </p>
 
             {/* Direct Contact Copy Bars */}

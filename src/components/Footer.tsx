@@ -47,7 +47,7 @@ export const Footer = () => {
               Rashmishara Nawodani
             </a>
             <p className="text-xs text-theme-secondary">
-              Software Engineering Undergraduate
+              3rd Year IT Undergraduate @ UoM
             </p>
           </div>
 
