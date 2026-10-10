@@ -23,12 +23,14 @@ export const educationData: EducationItem[] = [
     logo: uniLogo,
     period: '2024 - Present',
     coursework: [
+      'Programming Fundamentals',
       'Data Structures & Algorithms',
       'Object-Oriented Programming',
       'Database Systems',
       'Computer Networks',
       'Software Engineering',
-      'Agile Methodologies',
+      'Operating Systems',
+      'Object-Oriented Analysis & Design'
     ],
   },
   {
@@ -39,12 +41,10 @@ export const educationData: EducationItem[] = [
     period: '2023 - 2024',
     coursework: [
       'Information Technology Concepts',
-      'Enhancing Productivity with MS Office',
       'Computer Hardware',
       'Network Technology',
       'Internet, Email & Web Designing',
       'Graphics and Multimedia',
-      'Software Engineering',
       'Python Programming',
       'Database Concepts',
       'Programming with C#',

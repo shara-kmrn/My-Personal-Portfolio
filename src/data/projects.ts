@@ -222,12 +222,61 @@ export const projectsData: Project[] = [
     image: blimas3Img,
     gallery: [blimas3Img, blimasImg, blimas1Img, blimas2Img],
   },
+   {
+    id: 'personal-portfolio',
+    title: 'Personal Portfolio',
+    fullName: 'Modern Interactive Developer Portfolio & Showcase',
+    type: 'Individual Project',
+    category: 'Web',
+    description:
+      'A modern, high-performance personal developer portfolio web application built with React 19, TypeScript, Vite, and Tailwind CSS v4, engineered to showcase engineering projects, certifications, technical skills, and leadership experiences.',
+    technologies: [
+      'React 19',
+      'TypeScript',
+      'Vite',
+      'Tailwind CSS v4',
+      'Motion',
+      'Lucide Icons',
+      'Git',
+      'GitHub',
+    ],
+    features: [
+      'Responsive modern dark/light UI with custom grid backgrounds and glassmorphism cards',
+      'Dynamic multi-category project filtering (Full-Stack, Web, IoT) with animated layout transitions',
+      'Interactive Project Details modals with accessible keyboard navigation (ESC) & body scroll locking',
+      'Categorized technical skills showcase across Languages, Frontend, Backend, Databases, and Tools',
+      'Comprehensive certifications section with verified modal credential viewing',
+      'Direct contact integration with WhatsApp quick-chat, social channels, and instant CV download',
+    ],
+    highlights: [
+      {
+        title: 'Modern React 19 & Vite Architecture',
+        desc: 'Engineered using React 19 and Vite for blazing-fast development reload cycles and an ultra-lean, optimized production build.',
+      },
+      {
+        title: 'Fluid Orchestrated Micro-Animations',
+        desc: 'Integrated Motion (Framer Motion) for staggered container animations, smooth filter transitions, and interactive hover feedback.',
+      },
+      {
+        title: 'Accessible Modal & Dialog Management',
+        desc: 'Built custom accessible modal dialogs with backdrop blur dismissals, Escape key handlers, and clean body scroll management.',
+      },
+      {
+        title: 'Modern Custom Design System',
+        desc: 'Designed a sleek modern UI with Tailwind CSS v4, custom theme accents, and responsive mobile-first layouts.',
+      },
+    ],
+    contribution:
+      'Designed, architected, and developed the entire personal portfolio from scratch, including UI component design, animation systems, responsive layouts, and content integration.',
+    githubUrl: 'https://github.com/shara-kmrn/My-Personal-Portfolio',
+    liveUrl: undefined,
+    image: portfolioImg,
+  },
   {
     id: 'weather-dashboard',
     title: 'Live Weather Dashboard',
     fullName: 'Real-Time Weather Metrics & 5-Day Forecast System',
     type: 'Individual Project',
-    period: 'May 2023',
     category: 'Web',
     description:
       'Developed and deployed a modern, responsive Weather Dashboard web application featuring a dynamic glassmorphism UI system and live weather API integration.',
@@ -274,55 +323,5 @@ export const projectsData: Project[] = [
     githubUrl: undefined,
     image: weatherImg,
   },
-  {
-    id: 'personal-portfolio',
-    title: 'Personal Developer Portfolio',
-    fullName: 'Modern Interactive Developer Portfolio & Showcase',
-    type: 'Individual Project',
-    period: 'Ongoing',
-    category: 'Web',
-    description:
-      'A modern, high-performance personal developer portfolio web application built with React 19, TypeScript, Vite, and Tailwind CSS v4, engineered to showcase engineering projects, certifications, technical skills, and leadership experiences.',
-    technologies: [
-      'React 19',
-      'TypeScript',
-      'Vite',
-      'Tailwind CSS v4',
-      'Motion',
-      'Lucide Icons',
-      'Git',
-      'GitHub',
-    ],
-    features: [
-      'Responsive modern dark/light UI with custom grid backgrounds and glassmorphism cards',
-      'Dynamic multi-category project filtering (Full-Stack, Web, IoT) with animated layout transitions',
-      'Interactive Project Details modals with accessible keyboard navigation (ESC) & body scroll locking',
-      'Categorized technical skills showcase across Languages, Frontend, Backend, Databases, and Tools',
-      'Comprehensive certifications section with verified modal credential viewing',
-      'Direct contact integration with WhatsApp quick-chat, social channels, and instant CV download',
-    ],
-    highlights: [
-      {
-        title: 'Modern React 19 & Vite Architecture',
-        desc: 'Engineered using React 19 and Vite for blazing-fast development reload cycles and an ultra-lean, optimized production build.',
-      },
-      {
-        title: 'Fluid Orchestrated Micro-Animations',
-        desc: 'Integrated Motion (Framer Motion) for staggered container animations, smooth filter transitions, and interactive hover feedback.',
-      },
-      {
-        title: 'Accessible Modal & Dialog Management',
-        desc: 'Built custom accessible modal dialogs with backdrop blur dismissals, Escape key handlers, and clean body scroll management.',
-      },
-      {
-        title: 'Modern Custom Design System',
-        desc: 'Designed a sleek modern UI with Tailwind CSS v4, custom theme accents, and responsive mobile-first layouts.',
-      },
-    ],
-    contribution:
-      'Designed, architected, and developed the entire personal portfolio from scratch, including UI component design, animation systems, responsive layouts, and content integration.',
-    githubUrl: 'https://github.com/shara-kmrn/My-Personal-Portfolio',
-    liveUrl: undefined,
-    image: portfolioImg,
-  },
+ 
 ]
