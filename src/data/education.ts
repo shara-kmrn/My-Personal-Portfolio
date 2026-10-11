@@ -30,7 +30,8 @@ export const educationData: EducationItem[] = [
       'Computer Networks',
       'Software Engineering',
       'Operating Systems',
-      'Object-Oriented Analysis & Design'
+      'Object-Oriented Analysis & Design',
+      'Web Technologies'
     ],
   },
   {

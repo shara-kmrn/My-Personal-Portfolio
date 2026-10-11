@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import type { Variants } from 'motion/react'
 import { motion } from 'motion/react'
 import { Mail, ArrowRight, Download, User, Terminal, Sparkles } from 'lucide-react'
@@ -10,6 +11,12 @@ const MEDIUM_URL = 'https://medium.com/@rashmishara1202'
 const EMAIL_ADDRESS = 'mailto:rashmishara1202@gmail.com'
 const CV_FILENAME = 'Rashmishara Nawodani SE Intern.pdf'
 const CV_URL = `/${encodeURIComponent(CV_FILENAME)}`
+
+const ROLES = [
+  'IT Undergraduate',
+  'Full Stack Developer',
+  'UI/UX Developer',
+]
 
 // Custom Brand SVG Icons
 const GithubIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
@@ -50,6 +57,38 @@ const MediumIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
 )
 
 export const Hero = () => {
+  const [roleIndex, setRoleIndex] = useState(0)
+  const [displayedText, setDisplayedText] = useState(ROLES[0])
+  const [isDeleting, setIsDeleting] = useState(false)
+
+  useEffect(() => {
+    const currentRole = ROLES[roleIndex]
+    let timeout: ReturnType<typeof setTimeout>
+
+    if (!isDeleting && displayedText === currentRole) {
+      // Pause at fully typed role for 2 seconds
+      timeout = setTimeout(() => {
+        setIsDeleting(true)
+      }, 2000)
+    } else if (isDeleting && displayedText === '') {
+      // Pause when deleted before typing next role
+      setIsDeleting(false)
+      setRoleIndex((prev) => (prev + 1) % ROLES.length)
+      timeout = setTimeout(() => {}, 300)
+    } else {
+      const nextText = isDeleting
+        ? currentRole.substring(0, displayedText.length - 1)
+        : currentRole.substring(0, displayedText.length + 1)
+
+      const typingSpeed = isDeleting ? 40 : 80
+      timeout = setTimeout(() => {
+        setDisplayedText(nextText)
+      }, typingSpeed)
+    }
+
+    return () => clearTimeout(timeout)
+  }, [displayedText, isDeleting, roleIndex])
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -101,8 +140,15 @@ export const Hero = () => {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-theme-text">
               Rashmishara <span className="text-brand-gradient">Nawodani</span>
             </h1>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-theme-accent tracking-tight highlight-strip-neon pl-4 mt-2">
-              IT Undergraduate
+            <h2
+              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-theme-accent tracking-tight highlight-strip-neon pl-4 mt-2 min-h-[2.5rem] sm:min-h-[2.75rem] lg:min-h-[3rem] flex items-center"
+              aria-label={`Role: ${displayedText}`}
+            >
+              <span>{displayedText}</span>
+              <span
+                className="inline-block w-[3px] h-[0.85em] bg-theme-accent ml-1.5 animate-pulse shadow-[0_0_8px_var(--theme-accent)]"
+                aria-hidden="true"
+              />
             </h2>
           </motion.div>
 

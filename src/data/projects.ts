@@ -269,7 +269,7 @@ export const projectsData: Project[] = [
     contribution:
       'Designed, architected, and developed the entire personal portfolio from scratch, including UI component design, animation systems, responsive layouts, and content integration.',
     githubUrl: 'https://github.com/shara-kmrn/My-Personal-Portfolio',
-    liveUrl: 'https://my-personal-portfolio-rn-898c.vercel.app/',
+    liveUrl: 'https://rashmishara-portfolio.vercel.app/',
     image: portfolioImg,
   },
   {

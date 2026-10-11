@@ -28,7 +28,11 @@ const FOOTER_LINKS = [
   { label: 'Contact', href: '#contact' },
 ]
 
-export const Footer = () => {
+interface FooterProps {
+  onReplayIntro?: () => void
+}
+
+export const Footer = ({ onReplayIntro }: FooterProps) => {
   const currentYear = new Date().getFullYear()
 
   const hasGithub = Boolean(contactInfo.github && contactInfo.github.trim() && contactInfo.github !== '#')
@@ -67,9 +71,22 @@ export const Footer = () => {
           </nav>
         </div>
 
-        {/* Bottom Bar: Copyright & Socials */}
+        {/* Bottom Bar: Copyright, Replay Intro & Socials */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-theme-secondary">
-          <p>© {currentYear} Rashmishara Nawodani. All rights reserved.</p>
+          <div className="flex flex-wrap items-center gap-3">
+            <p>© {currentYear} Rashmishara Nawodani. All rights reserved.</p>
+            {onReplayIntro && (
+              <button
+                type="button"
+                onClick={onReplayIntro}
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-mono text-theme-secondary hover:text-theme-accent bg-theme-bg border border-theme-border hover:border-theme-accent/40 transition-all cursor-pointer shadow-sm"
+                title="Replay Interactive Intro Screen"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00F2FE] animate-pulse" />
+                <span>Replay Intro</span>
+              </button>
+            )}
+          </div>
 
           {/* Social Icons (rendered only if valid URLs are set) */}
           {(hasGithub || hasLinkedin) && (

@@ -23,7 +23,13 @@
     </script>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div style="position:fixed;inset:0;background-color:#080915;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#00F2FE;font-family:'Inter',system-ui,-apple-system,sans-serif;z-index:99999;">
+        <div style="width:48px;height:48px;border:3px solid rgba(0,242,254,0.15);border-top-color:#00F2FE;border-right-color:#8B5CF6;border-radius:50%;animation:initial-spin 0.8s linear infinite;"></div>
+        <div style="margin-top:18px;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#94A3B8;">Initialising Portfolio...</div>
+        <style>@keyframes initial-spin{to{transform:rotate(360deg)}}</style>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
