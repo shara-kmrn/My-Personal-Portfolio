@@ -8,7 +8,8 @@ const GITHUB_URL = 'https://github.com/shara-kmrn'
 const LINKEDIN_URL = 'https://www.linkedin.com/in/rashmishara-nawodani-731093349'
 const MEDIUM_URL = 'https://medium.com/@rashmishara1202'
 const EMAIL_ADDRESS = 'mailto:rashmishara1202@gmail.com'
-const CV_URL = '/Rashmishara Nawodani SE intern.pdf'
+const CV_FILENAME = 'Rashmishara Nawodani SE Intern.pdf'
+const CV_URL = `/${encodeURIComponent(CV_FILENAME)}`
 
 // Custom Brand SVG Icons
 const GithubIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
@@ -142,7 +143,7 @@ export const Hero = () => {
             {/* Secondary CTA Button */}
             <a
               href={CV_URL}
-              download="Rashmishara Nawodani SE intern.pdf"
+              download={CV_FILENAME}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Download Rashmishara Nawodani's CV (PDF)"
