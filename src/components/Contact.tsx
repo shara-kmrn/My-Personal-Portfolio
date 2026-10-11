@@ -2,7 +2,8 @@ import { useState } from 'react'
 import type { FormEvent } from 'react'
 import type { Variants } from 'motion/react'
 import { motion } from 'motion/react'
-import { Mail, Phone, Copy, Check, Globe, MessageSquare, AlertCircle } from 'lucide-react'
+import { Mail, Phone, Copy, Check, Globe, MessageSquare, AlertCircle, CheckCircle2, Loader2 } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 import { contactInfo } from '../data/contact'
 
 const GithubIcon = ({ className = 'w-5 h-5' }: { className?: string }) => (
@@ -42,8 +43,9 @@ export const Contact = () => {
     message: '',
   })
   const [copiedField, setCopiedField] = useState<string | null>(null)
-  const [statusMessage, setStatusMessage] = useState<string | null>(null)
-  const [fieldErrors, setFieldErrors] = useState<{ name?: string; message?: string }>({})
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [status, setStatus] = useState<{ type: 'success' | 'error' | 'info'; message: string } | null>(null)
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; message?: string }>({})
 
   const handleCopy = (text: string, fieldName: string) => {
     navigator.clipboard.writeText(text)
@@ -51,16 +53,25 @@ export const Contact = () => {
     setTimeout(() => setCopiedField(null), 2000)
   }
 
-  const validateForm = () => {
-    const errors: { name?: string; message?: string } = {}
+  const validateForm = (requireEmail = false) => {
+    const errors: { name?: string; email?: string; message?: string } = {}
     if (!formData.name.trim()) errors.name = 'Please enter your name.'
+    if (requireEmail) {
+      if (!formData.email.trim()) {
+        errors.email = 'Please enter your email.'
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+        errors.email = 'Please enter a valid email address.'
+      }
+    } else if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      errors.email = 'Please enter a valid email address.'
+    }
     if (!formData.message.trim()) errors.message = 'Please enter a message.'
     setFieldErrors(errors)
     return Object.keys(errors).length === 0
   }
 
   const handleSendWhatsApp = () => {
-    if (!validateForm()) return
+    if (!validateForm(false)) return
 
     const textMsg = `Hello Rashmishara Nawodani,\n\nName: ${formData.name}\nEmail: ${formData.email || 'N/A'}\nSubject: ${formData.subject || 'General Inquiry'}\n\nMessage:\n${formData.message}`
     const encodedText = encodeURIComponent(textMsg)
@@ -68,16 +79,68 @@ export const Contact = () => {
     window.open(whatsappUrl, '_blank')
   }
 
-  const handleSendEmail = (e: FormEvent) => {
+  const handleSendEmail = async (e: FormEvent) => {
     e.preventDefault()
-    if (!validateForm()) return
+    if (!validateForm(true)) return
 
-    const mailSubject = encodeURIComponent(formData.subject || `Portfolio Contact from ${formData.name}`)
-    const mailBody = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email || 'N/A'}\n\nMessage:\n${formData.message}`
-    )
-    window.location.href = `mailto:${contactInfo.email}?subject=${mailSubject}&body=${mailBody}`
-    setStatusMessage('Thank you! Opening your email client to dispatch the message.')
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+    // Fallback to mailto if EmailJS credentials are not configured yet
+    if (!serviceId || !templateId || !publicKey || serviceId === 'your_service_id_here') {
+      const mailSubject = encodeURIComponent(formData.subject || `Portfolio Contact from ${formData.name}`)
+      const mailBody = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+      )
+      window.location.href = `mailto:${contactInfo.email}?subject=${mailSubject}&body=${mailBody}`
+      setStatus({
+        type: 'info',
+        message: 'Opening your email client to send message. (To send directly on the page, configure EmailJS keys in .env)',
+      })
+      return
+    }
+
+    setIsSubmitting(true)
+    setStatus(null)
+
+    try {
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          email: formData.email,
+          from_name: formData.name,
+          from_email: formData.email,
+          reply_to: formData.email,
+          subject: formData.subject || `Portfolio Contact from ${formData.name}`,
+          message: formData.message,
+          to_name: 'Rashmishara Nawodani',
+        },
+        publicKey
+      )
+
+      setStatus({
+        type: 'success',
+        message: 'Thank you! Your message has been sent successfully. I will get back to you soon.',
+      })
+      setFormData({
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+      })
+      setFieldErrors({})
+    } catch (error) {
+      console.error('EmailJS Error:', error)
+      setStatus({
+        type: 'error',
+        message: 'Failed to send message via EmailJS. Please try sending via WhatsApp or check back later.',
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const containerVariants: Variants = {
@@ -265,7 +328,10 @@ export const Contact = () => {
                     type="text"
                     required
                     value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, name: e.target.value })
+                      if (fieldErrors.name) setFieldErrors((prev) => ({ ...prev, name: undefined }))
+                    }}
                     placeholder="e.g. Jane Doe"
                     className="w-full px-4 py-3 rounded-xl bg-theme-bg border border-theme-border text-sm text-theme-text placeholder:text-theme-secondary/60 focus:outline-none focus:border-theme-accent transition-colors"
                   />
@@ -280,16 +346,26 @@ export const Contact = () => {
                 {/* Your Email */}
                 <div className="space-y-1.5">
                   <label htmlFor="contact-email" className="block text-xs font-semibold text-theme-text">
-                    Your Email
+                    Your Email <span className="text-theme-accent">*</span>
                   </label>
                   <input
                     id="contact-email"
                     type="email"
+                    required
                     value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, email: e.target.value })
+                      if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: undefined }))
+                    }}
                     placeholder="name@example.com"
                     className="w-full px-4 py-3 rounded-xl bg-theme-bg border border-theme-border text-sm text-theme-text placeholder:text-theme-secondary/60 focus:outline-none focus:border-theme-accent transition-colors"
                   />
+                  {fieldErrors.email && (
+                    <p className="text-xs text-red-400 flex items-center gap-1">
+                      <AlertCircle className="w-3 h-3" />
+                      <span>{fieldErrors.email}</span>
+                    </p>
+                  )}
                 </div>
 
                 {/* Subject */}
@@ -317,7 +393,10 @@ export const Contact = () => {
                     required
                     rows={4}
                     value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    onChange={(e) => {
+                      setFormData({ ...formData, message: e.target.value })
+                      if (fieldErrors.message) setFieldErrors((prev) => ({ ...prev, message: undefined }))
+                    }}
                     placeholder="Hello Rashmishara Nawodani, I'd like to get in touch regarding..."
                     className="w-full px-4 py-3 rounded-xl bg-theme-bg border border-theme-border text-sm text-theme-text placeholder:text-theme-secondary/60 focus:outline-none focus:border-theme-accent transition-colors resize-none"
                   />
@@ -334,8 +413,9 @@ export const Contact = () => {
                   {/* WhatsApp Button */}
                   <button
                     type="button"
+                    disabled={isSubmitting}
                     onClick={handleSendWhatsApp}
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider btn-neon-lime cursor-pointer shadow-lg"
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider btn-neon-lime cursor-pointer shadow-lg disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   >
                     <MessageSquare className="w-4 h-4" />
                     <span>Send via WhatsApp</span>
@@ -344,18 +424,45 @@ export const Contact = () => {
                   {/* Email Button */}
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider btn-dark-slate cursor-pointer shadow-lg"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider btn-dark-slate cursor-pointer shadow-lg disabled:opacity-60 disabled:cursor-not-allowed transition-all"
                   >
-                    <Mail className="w-4 h-4" />
-                    <span>Send via Email</span>
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-theme-accent" />
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Mail className="w-4 h-4" />
+                        <span>Send via Email</span>
+                      </>
+                    )}
                   </button>
                 </div>
 
                 {/* Status Notice */}
-                {statusMessage && (
-                  <p className="text-xs text-theme-accent font-medium pt-1 text-center">
-                    {statusMessage}
-                  </p>
+                {status && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -4 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`p-3.5 rounded-xl text-xs font-medium flex items-start gap-2.5 transition-colors ${
+                      status.type === 'success'
+                        ? 'bg-emerald-500/10 border border-emerald-500/30 text-emerald-400'
+                        : status.type === 'error'
+                        ? 'bg-rose-500/10 border border-rose-500/30 text-rose-400'
+                        : 'bg-theme-accent/10 border border-theme-accent/30 text-theme-accent'
+                    }`}
+                  >
+                    {status.type === 'success' ? (
+                      <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 text-emerald-400" />
+                    ) : status.type === 'error' ? (
+                      <AlertCircle className="w-4 h-4 shrink-0 mt-0.5 text-rose-400" />
+                    ) : (
+                      <Mail className="w-4 h-4 shrink-0 mt-0.5 text-theme-accent" />
+                    )}
+                    <span className="leading-relaxed">{status.message}</span>
+                  </motion.div>
                 )}
 
                 {/* Footer Note */}
