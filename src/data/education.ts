@@ -53,14 +53,12 @@ export const educationData: EducationItem[] = [
   },
   {
     id: 'school A/L',
-    degree: 'G.C.E. Advanced Level(Biological Science Stream)',
+    degree: 'G.C.E. Advanced Level',
     institution: 'B/Bandarawela Central College',
     logo: bmmvLogo,
     period: '2019 - 2021',
     coursework: [
-      'Chemistry - A',
-      'Physics - B',
-      'Biology - B',
+      'ABB',
       'Z-Score:1.6301',
     ],
   },
