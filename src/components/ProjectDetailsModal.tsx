@@ -79,13 +79,16 @@ export const ProjectDetailsModal = ({ project, onClose }: ProjectDetailsModalPro
             {/* Modal Header */}
             <div className="flex items-center justify-between p-5 sm:p-6 border-b border-theme-border bg-theme-bg/60">
               <div className="space-y-1">
-                <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <span className="tag-neon text-xs py-0.5 px-2.5">
                     {project.category}
                   </span>
                   <span className="text-xs font-semibold text-theme-secondary">
                     {project.type}
                   </span>
+                  {project.date && (
+                    <span className="text-xs text-theme-secondary">{project.date}</span>
+                  )}
                   {project.period && (
                     <span
                       className={`text-[11px] px-2.5 py-0.5 rounded-full font-semibold border ${

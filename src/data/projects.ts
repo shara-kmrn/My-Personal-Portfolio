@@ -5,6 +5,7 @@ import blimas2Img from '../assets/projects/blimas2.jpg'
 import blimas3Img from '../assets/projects/blimas3.jpg'
 import weatherImg from '../assets/projects/weather.jpg'
 import portfolioImg from '../assets/projects/portfolio.png'
+import eventImg from '../assets/projects/event.png'
 
 export interface HighlightItem {
   title: string
@@ -17,6 +18,7 @@ export interface Project {
   fullName?: string
   type: string
   period?: string
+  date?: string
   role?: string
   category: 'All' | 'Full-Stack' | 'Web' | 'IoT'
   description: string
@@ -102,65 +104,50 @@ export const projectsData: Project[] = [
   },
   {
     id: 'event-booking-system',
-    title: 'Event Management & Ticketing',
-    fullName: 'Event Management Ticketing Micro-SaaS Platform',
+    title: 'Eventra',
+    fullName: 'Full-Stack Event Booking and Ticketing System',
     type: 'Individual Project',
-    period: 'Ongoing',
+    date: 'Oct 2026',
     category: 'Full-Stack',
     description:
-      'Full-stack multi-tenant event management and ticketing platform featuring role-based access control, atomic ticket reservation, QR code check-in verification, and real-time revenue analytics for organizers and attendees.',
+      'Customers can discover events, reserve tickets, pay through Stripe, and access digital QR tickets. Organizers manage events and track revenue, while administrators manage users, moderate events, and process refunds.',
     technologies: [
-      'React (Vite)',
-      'Node.js',
+      'React',
       'Express.js',
       'MongoDB',
+      'Stripe',
+      'JavaScript',
+      'Tailwind CSS',
+      'Node.js',
       'Mongoose',
-      'Tailwind CSS v4',
-      'Axios',
+      'RESTful APIs',
       'JWT',
-      'REST APIs',
-      'qrcode.react',
+      'Nodemailer',
     ],
     features: [
-      'Full-stack micro-SaaS architecture within a modular monorepo structure',
-      'Secure Role-Based Access Control (RBAC) supporting Customer and Event Organizer roles',
-      'Atomic ticket booking and inventory management engine preventing race conditions under concurrency',
-      'Client-side digital ticket generation with dynamic QR code rendering (qrcode.react)',
-      'Gate check-in token verification workflows for organizers at entry gates',
-      'Organizer Dashboard with event publishing, real-time ticket sales tracking & automated analytics',
+      'Event discovery and ticket reservations with concurrency-safe inventory',
+      'Stripe Checkout, digital QR tickets, and single-use check-in',
+      'Organizer dashboards for event management and revenue analytics',
+      'Admin tools for user management, event moderation, and refunds',
+      'Role-based access and email OTP verification',
     ],
     highlights: [
       {
-        title: 'Full-Stack Micro-SaaS Architecture',
-        desc: 'Architecting and developing a full-stack micro-SaaS application using React (Vite), Node.js, Express.js, MongoDB, and Tailwind CSS v4 within a monorepo structure.',
+        title: 'Full-Stack Workflows & Authentication',
+        desc: 'Built responsive React interfaces and Express.js RESTful APIs for customer, organizer, and administrator workflows. Implemented JWT authentication, role-based access control (RBAC), bcrypt password hashing, and email OTP verification.',
       },
       {
-        title: 'Role-Based Access Control & Security',
-        desc: 'Engineering secure Role-Based Access Control (RBAC) and authentication workflows supporting Customer and Event Organizer roles using JWT, HTTP interceptors, and React Context.',
+        title: 'Concurrency-Safe Ticket Reservations',
+        desc: 'Designed ticket inventory management using atomic MongoDB updates, idempotent booking operations, and expiring reservations to prevent overselling and duplicate bookings during concurrent requests.',
       },
       {
-        title: 'Atomic Ticket Booking Engine',
-        desc: 'Developing an atomic ticket booking and inventory management engine to prevent race conditions and handle concurrent seat reservations.',
-      },
-      {
-        title: 'Digital QR Tickets & Gate Check-In',
-        desc: 'Implementing client-side digital ticket generation with dynamic QR code rendering (qrcode.react) and gate check-in token verification workflows.',
-      },
-      {
-        title: 'Organizer Dashboard & Revenue Analytics',
-        desc: 'Designing and integrating an Organizer Dashboard featuring event publishing, real-time ticket sales tracking, and automated check-in verification.',
+        title: 'Stripe Payments & QR Check-In',
+        desc: 'Integrated Stripe Checkout with webhook signature verification and server-side payment verification. Issued QR tickets after successful payment and implemented atomic, single-use check-in to prevent ticket reuse.',
       },
     ],
-    contribution:
-      'Architecting and developing the full-stack micro-SaaS application, implementing atomic ticket reservations, QR-code based ticket generation, RBAC authentication workflows, and real-time organizer revenue dashboards.',
-    businessRules: [
-      'Atomic reservation prevents overselling and race conditions under concurrent load.',
-      'Customers can book an event only before scheduled commencement.',
-      'Ticket sales automatically lock when an event reaches capacity or has ended.',
-      'Gate check-in tokens verify QR code validity and enforce single-entry verification.',
-    ],
-    githubUrl: undefined,
+    githubUrl: 'https://github.com/shara-kmrn/Event-Booking-System',
     liveUrl: undefined,
+    image: eventImg,
   },
   {
     id: 'blimas',
