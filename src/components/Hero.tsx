@@ -9,7 +9,7 @@ const GITHUB_URL = 'https://github.com/shara-kmrn'
 const LINKEDIN_URL = 'https://www.linkedin.com/in/rashmishara-nawodani-731093349'
 const MEDIUM_URL = 'https://medium.com/@rashmishara1202'
 const EMAIL_ADDRESS = 'mailto:rashmishara1202@gmail.com'
-const CV_FILENAME = 'Rashmishara Nawodani SE Intern.pdf'
+const CV_FILENAME = 'Rashmishara Nawodani SE Intern v1.0.pdf'
 const CV_URL = `/${encodeURIComponent(CV_FILENAME)}`
 
 const ROLES = [
